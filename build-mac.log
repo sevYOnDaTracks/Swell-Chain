@@ -1,0 +1,1094 @@
+-- The C compiler identification is AppleClang 21.0.0.21000401
+-- The CXX compiler identification is AppleClang 21.0.0.21000401
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring juceaide
+-- Building juceaide
+-- Exporting juceaide
+-- Testing juceaide
+-- Finished setting up juceaide
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (22.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Chain/build-mac
+[  2%] Generating ChainTest_artefacts/JuceLibraryCode/JuceHeader.h
+[  2%] Generating juce_binarydata_ChainAssets/JuceLibraryCode/BinaryData1.cpp, juce_binarydata_ChainAssets/JuceLibraryCode/BinaryData.h
+[  4%] Building CXX object CMakeFiles/juce_vst3_helper.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
+[  5%] Building CXX object CMakeFiles/ChainTest.dir/Tests/ChainTest.cpp.o
+[  9%] Building CXX object CMakeFiles/ChainTest.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.mm.o
+[  9%] Building CXX object CMakeFiles/ChainTest.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_dsp/juce_dsp.mm.o
+[  9%] Building CXX object CMakeFiles/ChainTest.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.mm.o
+[ 11%] Building CXX object CMakeFiles/ChainAssets.dir/juce_binarydata_ChainAssets/JuceLibraryCode/BinaryData1.cpp.o
+[ 12%] Linking CXX static library libChainAssets.a
+[ 12%] Built target ChainAssets
+[ 13%] Building CXX object CMakeFiles/ChainTest.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_core/juce_core_CompilationTime.cpp.o
+[ 15%] Building CXX object CMakeFiles/SwellChain.dir/Source/PluginProcessor.cpp.o
+[ 16%] Building CXX object CMakeFiles/SwellChain.dir/Source/PluginEditor.cpp.o
+[ 18%] Linking CXX executable juce_vst3_helper
+[ 18%] Built target juce_vst3_helper
+[ 19%] Building CXX object CMakeFiles/ChainTest.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_core/juce_core.mm.o
+[ 20%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
+[ 22%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
+[ 23%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.mm.o
+[ 25%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.mm.o
+[ 26%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.mm.o
+[ 27%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/juce_graphics_Harfbuzz.cpp:92:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb.hh:548:
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:192:33: note: in instantiation of member function 'CrapHelper<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>::get_crap' requested here
+  192 |   static Type & get () { return Crap (Type); }
+      |                                 ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-array.hh:83:36: note: in instantiation of member function 'CrapOrNullHelper<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>::get' requested here
+   83 |     if (unlikely (!length)) return CrapOrNull (Type);
+      |                                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:198:50: note: expanded from macro 'CrapOrNull'
+  198 | #define CrapOrNull(Type) CrapOrNullHelper<Type>::get ()
+      |                                                  ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:89:41: note: in instantiation of member function 'hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>::__item__' requested here
+   89 |   item_t operator * () { return thiz()->__item__ (); }
+      |                                         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:456:55: note: in instantiation of member function 'hb_iter_t<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t &>::operator*' requested here
+  456 |   { while (it && !hb_has (p.get (), hb_get (f.get (), *it))) ++it; }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:482:12: note: in instantiation of member function 'hb_filter_iter_t<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::hb_filter_iter_t' requested here
+  482 |   { return hb_filter_iter_t<Iter, Pred, Proj> (it, p, f); }
+      |            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:369:51: note: in instantiation of function template specialization 'hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::operator()<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, nullptr>' requested here
+  369 | operator | (Lhs&& lhs, Rhs&& rhs) HB_AUTO_RETURN (std::forward<Rhs> (rhs) (std::forward<Lhs> (lhs)))
+      |                                                   ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:424:5: note: in instantiation of function template specialization 'operator|<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>, nullptr>' requested here
+  424 |     | hb_filter (&item_t::is_real)
+      |     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:448:13: note: in instantiation of member function 'hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::iter_items' requested here
+  448 |     + this->iter_items ()
+      |             ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-multimap.hh:78:36: note: in instantiation of member function 'hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::values_ref' requested here
+   78 |     for (const auto &m : multiples.values_ref ())
+      |                                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_hashmap_t<unsigned int, Triple>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_hashmap_t<unsigned int, Triple>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<hb_hashmap_t<unsigned int, Triple>>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-layout-common.hh:2687:15: note: in instantiation of function template specialization 'hb_vector_t<hb_hashmap_t<unsigned int, Triple>>::push<hb_hashmap_t<unsigned int, Triple>>' requested here
+ 2687 |       regions.push (std::move (axis_tuples));
+      |               ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_inc_bimap_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_inc_bimap_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:210:30: note: in instantiation of member function 'CrapHelper<hb_inc_bimap_t>::get_crap' requested here
+  210 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-layout-common.hh:3350:40: note: in instantiation of member function 'hb_vector_t<hb_inc_bimap_t>::push' requested here
+ 3350 |       hb_inc_bimap_t *map = inner_maps.push ();
+      |                                        ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::tuple_delta_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::tuple_delta_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<OT::tuple_delta_t>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:331:11: note: in instantiation of function template specialization 'hb_vector_t<OT::tuple_delta_t>::push<const OT::tuple_delta_t &>' requested here
+  331 |       out.push (*this);
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:192:33: note: in instantiation of member function 'CrapHelper<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>::get_crap' requested here
+  192 |   static Type & get () { return Crap (Type); }
+      |                                 ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-array.hh:83:36: note: in instantiation of member function 'CrapOrNullHelper<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>::get' requested here
+   83 |     if (unlikely (!length)) return CrapOrNull (Type);
+      |                                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:198:50: note: expanded from macro 'CrapOrNull'
+  198 | #define CrapOrNull(Type) CrapOrNullHelper<Type>::get ()
+      |                                                  ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:89:41: note: in instantiation of member function 'hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>::__item__' requested here
+   89 |   item_t operator * () { return thiz()->__item__ (); }
+      |                                         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:456:55: note: in instantiation of member function 'hb_iter_t<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t &>::operator*' requested here
+  456 |   { while (it && !hb_has (p.get (), hb_get (f.get (), *it))) ++it; }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:482:12: note: in instantiation of member function 'hb_filter_iter_t<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::hb_filter_iter_t' requested here
+  482 |   { return hb_filter_iter_t<Iter, Pred, Proj> (it, p, f); }
+      |            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:369:51: note: in instantiation of function template specialization 'hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::operator()<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, nullptr>' requested here
+  369 | operator | (Lhs&& lhs, Rhs&& rhs) HB_AUTO_RETURN (std::forward<Rhs> (rhs) (std::forward<Lhs> (lhs)))
+      |                                                   ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:424:5: note: in instantiation of function template specialization 'operator|<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>, nullptr>' requested here
+  424 |     | hb_filter (&item_t::is_real)
+      |     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:428:13: note: in instantiation of member function 'hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::iter_items' requested here
+  428 |     + this->iter_items ()
+      |             ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1153:43: note: in instantiation of member function 'hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::iter_ref' requested here
+ 1153 |       for (const auto& _ : point_data_map.iter_ref ())
+      |                                           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::TupleVariationData::tuple_variations_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::TupleVariationData::tuple_variations_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<OT::TupleVariationData::tuple_variations_t>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1611:12: note: in instantiation of function template specialization 'hb_vector_t<OT::TupleVariationData::tuple_variations_t>::push<OT::TupleVariationData::tuple_variations_t>' requested here
+ 1611 |       vars.push (std::move (var_data_tuples));
+      |            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_vector_t<int>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_vector_t<int>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<hb_vector_t<int>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1744:23: note: in instantiation of member function 'hb_vector_t<hb_vector_t<int>>::operator[]' requested here
+ 1744 |       if (!(delta_rows[i].resize (num_cols))) return false;
+      |                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::delta_row_encoding_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::delta_row_encoding_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<OT::delta_row_encoding_t>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1787:19: note: in instantiation of function template specialization 'hb_vector_t<OT::delta_row_encoding_t>::push<OT::delta_row_encoding_t>' requested here
+ 1787 |         encodings.push (std::move (obj));
+      |                   ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::index_map_subset_plan_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::index_map_subset_plan_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<OT::index_map_subset_plan_t>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-hvar-table.hh:207:20: note: in instantiation of member function 'hb_vector_t<OT::index_map_subset_plan_t>::operator[]' requested here
+  207 |     index_map_plans[0].init (*index_maps[0], outer_map, inner_sets, plan, false);
+      |                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_set_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_set_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<hb_set_t>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-subset-cff-common.hh:387:21: note: in instantiation of member function 'hb_vector_t<hb_set_t>::operator[]' requested here
+  387 |       local_closures[i].clear();
+      |                     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::parsed_cs_str_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::parsed_cs_str_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::parsed_cs_str_t>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-subset-cff-common.hh:604:33: note: in instantiation of member function 'hb_vector_t<CFF::parsed_cs_str_t>::operator[]' requested here
+  604 |           return &(*parsed_local_subrs)[context.subr_num];
+      |                                        ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff2_font_dict_values_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff2_font_dict_values_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:456:25: note: in instantiation of member function 'CrapHelper<CFF::cff2_font_dict_values_t>::get_crap' requested here
+  456 |         if (unlikely (font == &Crap (cff2_font_dict_values_t))) goto fail;
+      |                                ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb.hh:273:47: note: expanded from macro 'unlikely'
+  273 | #define unlikely(expr) __builtin_expect (bool(expr), 0)
+      |                                               ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:516:39: note: in instantiation of member function 'OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_t, CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+  516 |     accelerator_t (hb_face_t *face) : accelerator_templ_t (face) {}
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:464:2: note: in instantiation of member function 'hb_vector_t<CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::operator[]' requested here
+  464 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:516:39: note: in instantiation of member function 'OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_t, CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+  516 |     accelerator_t (hb_face_t *face) : accelerator_templ_t (face) {}
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff2_private_dict_values_base_t<CFF::op_str_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:464:2: note: in instantiation of member function 'hb_vector_t<CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>::operator[]' requested here
+  464 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:528:46: note: in instantiation of member function 'OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_subset_t, CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>::accelerator_templ_t' requested here
+  528 |     accelerator_subset_t (hb_face_t *face) : SUPER (face) {}
+      |                                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1159:2: note: in instantiation of member function 'hb_vector_t<CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::operator[]' requested here
+ 1159 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1360:39: note: in instantiation of member function 'OT::cff1::accelerator_templ_t<CFF::cff1_private_dict_opset_t, CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+ 1360 |     accelerator_t (hb_face_t *face) : SUPER (face)
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff1_font_dict_values_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff1_font_dict_values_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:210:30: note: in instantiation of member function 'CrapHelper<CFF::cff1_font_dict_values_t>::get_crap' requested here
+  210 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1172:21: note: in instantiation of member function 'hb_vector_t<CFF::cff1_font_dict_values_t>::push' requested here
+ 1172 |           font = fontDicts.push ();
+      |                            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1360:39: note: in instantiation of member function 'OT::cff1::accelerator_templ_t<CFF::cff1_private_dict_opset_t, CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+ 1360 |     accelerator_t (hb_face_t *face) : SUPER (face)
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff1_private_dict_values_base_t<CFF::op_str_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1159:2: note: in instantiation of member function 'hb_vector_t<CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>::operator[]' requested here
+ 1159 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1494:46: note: in instantiation of member function 'OT::cff1::accelerator_templ_t<CFF::cff1_private_dict_opset_subset_t, CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>::accelerator_templ_t' requested here
+ 1494 |     accelerator_subset_t (hb_face_t *face) : SUPER (face) {}
+      |                                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_vector_t<hb_aat_map_t::range_flags_t, true>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_vector_t<hb_aat_map_t::range_flags_t, true>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<hb_vector_t<hb_aat_map_t::range_flags_t, true>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-aat-layout-morx-table.hh:1359:23: note: in instantiation of member function 'hb_vector_t<hb_vector_t<hb_aat_map_t::range_flags_t, true>>::operator[]' requested here
+ 1359 |       map->chain_flags[i].push (hb_aat_map_t::range_flags_t {chain->compile_flags (mapper),
+      |                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-aat-layout.cc:217:10: note: in instantiation of member function 'AAT::mortmorx<AAT::morx, AAT::ExtendedTypes, 1836020344>::compile_flags' requested here
+  217 |     morx.compile_flags (mapper, map);
+      |          ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::VariationSelectorRecord' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::VariationSelectorRecord>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-open-type.hh:722:37: note: in instantiation of member function 'CrapHelper<OT::VariationSelectorRecord>::get_crap' requested here
+  722 |     if (unlikely (i >= len)) return Crap (Type);
+      |                                     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-ot-cmap-table.hh:1446:26: note: in instantiation of member function 'OT::ArrayOf<OT::VariationSelectorRecord, OT::IntType<unsigned int>>::operator[]' requested here
+ 1446 |       c->add_link (record[j].defaultUVS, obj_indices[i].first);
+      |                          ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::IndexSubtableRecord' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::IndexSubtableRecord>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<OT::IndexSubtableRecord>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Color/CBDT/CBDT.hh:607:66: note: in instantiation of member function 'hb_vector_t<OT::IndexSubtableRecord>::operator[]' requested here
+  607 |       IndexSubtableRecord* record = c->serializer->embed (records[i]);
+      |                                                                  ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+[ 29%] Building C object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
+[ 30%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/juce_graphics.mm.o
+[ 31%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_events/juce_events.mm.o
+[ 33%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_core/juce_core_CompilationTime.cpp.o
+[ 34%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_core/juce_core.mm.o
+[ 36%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_data_structures/juce_data_structures.mm.o
+[ 37%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.mm.o
+[ 38%] Linking CXX executable ChainTest_artefacts/Release/ChainTest
+20 warnings generated.
+[ 38%] Built target ChainTest
+[ 40%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.mm.o
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/juce_graphics_Harfbuzz.cpp:92:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb.hh:548:
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:192:33: note: in instantiation of member function 'CrapHelper<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>::get_crap' requested here
+  192 |   static Type & get () { return Crap (Type); }
+      |                                 ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-array.hh:83:36: note: in instantiation of member function 'CrapOrNullHelper<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>::get' requested here
+   83 |     if (unlikely (!length)) return CrapOrNull (Type);
+      |                                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:198:50: note: expanded from macro 'CrapOrNull'
+  198 | #define CrapOrNull(Type) CrapOrNullHelper<Type>::get ()
+      |                                                  ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:89:41: note: in instantiation of member function 'hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>::__item__' requested here
+   89 |   item_t operator * () { return thiz()->__item__ (); }
+      |                                         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:456:55: note: in instantiation of member function 'hb_iter_t<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t &>::operator*' requested here
+  456 |   { while (it && !hb_has (p.get (), hb_get (f.get (), *it))) ++it; }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:482:12: note: in instantiation of member function 'hb_filter_iter_t<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::hb_filter_iter_t' requested here
+  482 |   { return hb_filter_iter_t<Iter, Pred, Proj> (it, p, f); }
+      |            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:369:51: note: in instantiation of function template specialization 'hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::operator()<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, nullptr>' requested here
+  369 | operator | (Lhs&& lhs, Rhs&& rhs) HB_AUTO_RETURN (std::forward<Rhs> (rhs) (std::forward<Lhs> (lhs)))
+      |                                                   ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:424:5: note: in instantiation of function template specialization 'operator|<hb_array_t<hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::item_t>, hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>, nullptr>' requested here
+  424 |     | hb_filter (&item_t::is_real)
+      |     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:448:13: note: in instantiation of member function 'hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::iter_items' requested here
+  448 |     + this->iter_items ()
+      |             ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-multimap.hh:78:36: note: in instantiation of member function 'hb_hashmap_t<unsigned int, hb_vector_t<unsigned int>>::values_ref' requested here
+   78 |     for (const auto &m : multiples.values_ref ())
+      |                                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_hashmap_t<unsigned int, Triple>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_hashmap_t<unsigned int, Triple>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<hb_hashmap_t<unsigned int, Triple>>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-layout-common.hh:2687:15: note: in instantiation of function template specialization 'hb_vector_t<hb_hashmap_t<unsigned int, Triple>>::push<hb_hashmap_t<unsigned int, Triple>>' requested here
+ 2687 |       regions.push (std::move (axis_tuples));
+      |               ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_inc_bimap_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_inc_bimap_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:210:30: note: in instantiation of member function 'CrapHelper<hb_inc_bimap_t>::get_crap' requested here
+  210 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-layout-common.hh:3350:40: note: in instantiation of member function 'hb_vector_t<hb_inc_bimap_t>::push' requested here
+ 3350 |       hb_inc_bimap_t *map = inner_maps.push ();
+      |                                        ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::tuple_delta_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::tuple_delta_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<OT::tuple_delta_t>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:331:11: note: in instantiation of function template specialization 'hb_vector_t<OT::tuple_delta_t>::push<const OT::tuple_delta_t &>' requested here
+  331 |       out.push (*this);
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:192:33: note: in instantiation of member function 'CrapHelper<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>::get_crap' requested here
+  192 |   static Type & get () { return Crap (Type); }
+      |                                 ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-array.hh:83:36: note: in instantiation of member function 'CrapOrNullHelper<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>::get' requested here
+   83 |     if (unlikely (!length)) return CrapOrNull (Type);
+      |                                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:198:50: note: expanded from macro 'CrapOrNull'
+  198 | #define CrapOrNull(Type) CrapOrNullHelper<Type>::get ()
+      |                                                  ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:89:41: note: in instantiation of member function 'hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>::__item__' requested here
+   89 |   item_t operator * () { return thiz()->__item__ (); }
+      |                                         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:456:55: note: in instantiation of member function 'hb_iter_t<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t &>::operator*' requested here
+  456 |   { while (it && !hb_has (p.get (), hb_get (f.get (), *it))) ++it; }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:482:12: note: in instantiation of member function 'hb_filter_iter_t<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::hb_filter_iter_t' requested here
+  482 |   { return hb_filter_iter_t<Iter, Pred, Proj> (it, p, f); }
+      |            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-iter.hh:369:51: note: in instantiation of function template specialization 'hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>::operator()<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, nullptr>' requested here
+  369 | operator | (Lhs&& lhs, Rhs&& rhs) HB_AUTO_RETURN (std::forward<Rhs> (rhs) (std::forward<Lhs> (lhs)))
+      |                                                   ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:424:5: note: in instantiation of function template specialization 'operator|<hb_array_t<hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::item_t>, hb_filter_iter_factory_t<bool (item_t::*)() const, const (unnamed struct at /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-algs.hh:228:1) &>, nullptr>' requested here
+  424 |     | hb_filter (&item_t::is_real)
+      |     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-map.hh:428:13: note: in instantiation of member function 'hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::iter_items' requested here
+  428 |     + this->iter_items ()
+      |             ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-meta.hh:76:55: note: expanded from macro 'HB_AUTO_RETURN'
+   76 | #define HB_AUTO_RETURN(E) -> decltype ((E)) { return (E); }
+      |                                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1153:43: note: in instantiation of member function 'hb_hashmap_t<const hb_vector_t<bool> *, hb_vector_t<char>>::iter_ref' requested here
+ 1153 |       for (const auto& _ : point_data_map.iter_ref ())
+      |                                           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::TupleVariationData::tuple_variations_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::TupleVariationData::tuple_variations_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<OT::TupleVariationData::tuple_variations_t>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1611:12: note: in instantiation of function template specialization 'hb_vector_t<OT::TupleVariationData::tuple_variations_t>::push<OT::TupleVariationData::tuple_variations_t>' requested here
+ 1611 |       vars.push (std::move (var_data_tuples));
+      |            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_vector_t<int>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_vector_t<int>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<hb_vector_t<int>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1744:23: note: in instantiation of member function 'hb_vector_t<hb_vector_t<int>>::operator[]' requested here
+ 1744 |       if (!(delta_rows[i].resize (num_cols))) return false;
+      |                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::delta_row_encoding_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::delta_row_encoding_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:219:30: note: in instantiation of member function 'CrapHelper<OT::delta_row_encoding_t>::get_crap' requested here
+  219 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-common.hh:1787:19: note: in instantiation of function template specialization 'hb_vector_t<OT::delta_row_encoding_t>::push<OT::delta_row_encoding_t>' requested here
+ 1787 |         encodings.push (std::move (obj));
+      |                   ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::index_map_subset_plan_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::index_map_subset_plan_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<OT::index_map_subset_plan_t>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../OT/glyf/../../hb-ot-var-hvar-table.hh:207:20: note: in instantiation of member function 'hb_vector_t<OT::index_map_subset_plan_t>::operator[]' requested here
+  207 |     index_map_plans[0].init (*index_maps[0], outer_map, inner_sets, plan, false);
+      |                    ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_set_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_set_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<hb_set_t>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-subset-cff-common.hh:387:21: note: in instantiation of member function 'hb_vector_t<hb_set_t>::operator[]' requested here
+  387 |       local_closures[i].clear();
+      |                     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::parsed_cs_str_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::parsed_cs_str_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::parsed_cs_str_t>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-subset-cff-common.hh:604:33: note: in instantiation of member function 'hb_vector_t<CFF::parsed_cs_str_t>::operator[]' requested here
+  604 |           return &(*parsed_local_subrs)[context.subr_num];
+      |                                        ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff2_font_dict_values_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff2_font_dict_values_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:456:25: note: in instantiation of member function 'CrapHelper<CFF::cff2_font_dict_values_t>::get_crap' requested here
+  456 |         if (unlikely (font == &Crap (cff2_font_dict_values_t))) goto fail;
+      |                                ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb.hh:273:47: note: expanded from macro 'unlikely'
+  273 | #define unlikely(expr) __builtin_expect (bool(expr), 0)
+      |                                               ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:516:39: note: in instantiation of member function 'OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_t, CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+  516 |     accelerator_t (hb_face_t *face) : accelerator_templ_t (face) {}
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:464:2: note: in instantiation of member function 'hb_vector_t<CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::operator[]' requested here
+  464 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:516:39: note: in instantiation of member function 'OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_t, CFF::cff2_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+  516 |     accelerator_t (hb_face_t *face) : accelerator_templ_t (face) {}
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff2_private_dict_values_base_t<CFF::op_str_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:464:2: note: in instantiation of member function 'hb_vector_t<CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>::operator[]' requested here
+  464 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff2-table.hh:528:46: note: in instantiation of member function 'OT::cff2::accelerator_templ_t<CFF::cff2_private_dict_opset_subset_t, CFF::cff2_private_dict_values_base_t<CFF::op_str_t>>::accelerator_templ_t' requested here
+  528 |     accelerator_subset_t (hb_face_t *face) : SUPER (face) {}
+      |                                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1159:2: note: in instantiation of member function 'hb_vector_t<CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::operator[]' requested here
+ 1159 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1360:39: note: in instantiation of member function 'OT::cff1::accelerator_templ_t<CFF::cff1_private_dict_opset_t, CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+ 1360 |     accelerator_t (hb_face_t *face) : SUPER (face)
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff1_font_dict_values_t' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff1_font_dict_values_t>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:210:30: note: in instantiation of member function 'CrapHelper<CFF::cff1_font_dict_values_t>::get_crap' requested here
+  210 |       return std::addressof (Crap (Type));
+      |                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1172:21: note: in instantiation of member function 'hb_vector_t<CFF::cff1_font_dict_values_t>::push' requested here
+ 1172 |           font = fontDicts.push ();
+      |                            ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1360:39: note: in instantiation of member function 'OT::cff1::accelerator_templ_t<CFF::cff1_private_dict_opset_t, CFF::cff1_private_dict_values_base_t<CFF::dict_val_t>>::accelerator_templ_t' requested here
+ 1360 |     accelerator_t (hb_face_t *face) : SUPER (face)
+      |                                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'CFF::cff1_private_dict_values_base_t<CFF::op_str_t>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1159:2: note: in instantiation of member function 'hb_vector_t<CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>::operator[]' requested here
+ 1159 |         privateDicts[i].init ();
+      |         ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-ot-cff1-table.hh:1494:46: note: in instantiation of member function 'OT::cff1::accelerator_templ_t<CFF::cff1_private_dict_opset_subset_t, CFF::cff1_private_dict_values_base_t<CFF::op_str_t>>::accelerator_templ_t' requested here
+ 1494 |     accelerator_subset_t (hb_face_t *face) : SUPER (face) {}
+      |                                              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'hb_vector_t<hb_aat_map_t::range_flags_t, true>' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<hb_vector_t<hb_aat_map_t::range_flags_t, true>>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<hb_vector_t<hb_aat_map_t::range_flags_t, true>>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-aat-layout-morx-table.hh:1359:23: note: in instantiation of member function 'hb_vector_t<hb_vector_t<hb_aat_map_t::range_flags_t, true>>::operator[]' requested here
+ 1359 |       map->chain_flags[i].push (hb_aat_map_t::range_flags_t {chain->compile_flags (mapper),
+      |                       ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-aat-layout.cc:217:10: note: in instantiation of member function 'AAT::mortmorx<AAT::morx, AAT::ExtendedTypes, 1836020344>::compile_flags' requested here
+  217 |     morx.compile_flags (mapper, map);
+      |          ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::VariationSelectorRecord' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::VariationSelectorRecord>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Var/VARC/../../../hb-open-type.hh:722:37: note: in instantiation of member function 'CrapHelper<OT::VariationSelectorRecord>::get_crap' requested here
+  722 |     if (unlikely (i >= len)) return Crap (Type);
+      |                                     ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-ot-cmap-table.hh:1446:26: note: in instantiation of member function 'OT::ArrayOf<OT::VariationSelectorRecord, OT::IntType<unsigned int>>::operator[]' requested here
+ 1446 |       c->add_link (record[j].defaultUVS, obj_indices[i].first);
+      |                          ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'OT::IndexSubtableRecord' [-Wnontrivial-memcall]
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:186:38: note: in instantiation of function template specialization 'Crap<OT::IndexSubtableRecord>' requested here
+  186 |   static Type & get_crap () { return Crap<Type> (); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-vector.hh:159:14: note: in instantiation of member function 'CrapHelper<OT::IndexSubtableRecord>::get_crap' requested here
+  159 |       return Crap (Type);
+      |              ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:188:38: note: expanded from macro 'Crap'
+  188 | #define Crap(Type) CrapHelper<Type>::get_crap ()
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/OT/Color/CBDT/CBDT.hh:607:66: note: in instantiation of member function 'hb_vector_t<OT::IndexSubtableRecord>::operator[]' requested here
+  607 |       IndexSubtableRecord* record = c->serializer->embed (records[i]);
+      |                                                                  ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_graphics/fonts/harfbuzz/hb-null.hh:179:11: note: explicitly cast the pointer to silence this warning
+  179 |   memcpy (obj, std::addressof (Null (Type)), sizeof (*obj));
+      |           ^
+      |           (void*)
+[ 41%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.mm.o
+[ 43%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.mm.o
+[ 44%] Building CXX object CMakeFiles/SwellChain.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_dsp/juce_dsp.mm.o
+20 warnings generated.
+[ 45%] Linking CXX static library "SwellChain_artefacts/Release/libSwell Chain_SharedCode.a"
+[ 45%] Built target SwellChain
+[ 50%] Generating SwellChain_artefacts/JuceLibraryCode/SwellChain_AU/PkgInfo
+[ 50%] Generating SwellChain_artefacts/JuceLibraryCode/SwellChain_Standalone/PkgInfo
+[ 50%] Generating SwellChain_artefacts/JuceLibraryCode/SwellChain_VST3/PkgInfo
+[ 52%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+[ 52%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+[ 58%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+[ 58%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+[ 58%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+[ 58%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+[ 59%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+[ 66%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+[ 66%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+[ 66%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+[ 66%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+[ 66%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+[ 72%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+[ 73%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+[ 73%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+[ 73%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+[ 73%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+[ 79%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+[ 79%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+[ 79%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+[ 79%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+[ 83%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+[ 83%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+[ 83%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+[ 84%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+[ 87%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+[ 87%] Building CXX object CMakeFiles/SwellChain_VST3.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+[ 90%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+[ 90%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+[ 93%] Building CXX object CMakeFiles/SwellChain_AU.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+[ 93%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+[ 94%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+[ 95%] Building CXX object CMakeFiles/SwellChain_Standalone.dir/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+Copying OS X content SwellChain_artefacts/Release/Standalone/Swell Chain.app/Contents/Resources/RecentFilesMenuTemplate.nib
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm:35:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp:83:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/juce_VST3Headers.h:154:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/base/source/fstring.cpp:41:
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:51:31: warning: first argument in call to 'memset' is a pointer to non-trivially copyable type 'Steinberg::FVariant' [-Wnontrivial-memcall]
+   51 |         inline FVariant () { memset (this, 0, sizeof (FVariant)); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:51:31: note: explicitly cast the pointer to silence this warning
+   51 |         inline FVariant () { memset (this, 0, sizeof (FVariant)); }
+      |                                      ^
+      |                                      (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:260:10: warning: first argument in call to 'memset' is a pointer to non-trivially copyable type 'Steinberg::FVariant' [-Wnontrivial-memcall]
+  260 |         memset (this, 0, sizeof (FVariant));
+      |                 ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:260:10: note: explicitly cast the pointer to silence this warning
+  260 |         memset (this, 0, sizeof (FVariant));
+      |                 ^
+      |                 (void*)
+[ 97%] Linking CXX executable "SwellChain_artefacts/Release/Standalone/Swell Chain.app/Contents/MacOS/Swell Chain"
+[ 97%] Built target SwellChain_Standalone
+[ 98%] Linking CXX CFBundle shared module "SwellChain_artefacts/Release/AU/Swell Chain.component/Contents/MacOS/Swell Chain"
+2 warnings generated.
+[ 98%] Built target SwellChain_AU
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm:35:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp:83:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/juce_VST3Headers.h:154:
+In file included from /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/base/source/fstring.cpp:41:
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:51:31: warning: first argument in call to 'memset' is a pointer to non-trivially copyable type 'Steinberg::FVariant' [-Wnontrivial-memcall]
+   51 |         inline FVariant () { memset (this, 0, sizeof (FVariant)); }
+      |                                      ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:51:31: note: explicitly cast the pointer to silence this warning
+   51 |         inline FVariant () { memset (this, 0, sizeof (FVariant)); }
+      |                                      ^
+      |                                      (void*)
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:260:10: warning: first argument in call to 'memset' is a pointer to non-trivially copyable type 'Steinberg::FVariant' [-Wnontrivial-memcall]
+  260 |         memset (this, 0, sizeof (FVariant));
+      |                 ^
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Glue/build/_deps/juce-src/modules/juce_audio_processors/format_types/VST3_SDK/pluginterfaces/base/fvariant.h:260:10: note: explicitly cast the pointer to silence this warning
+  260 |         memset (this, 0, sizeof (FVariant));
+      |                 ^
+      |                 (void*)
+2 warnings generated.
+[100%] Linking CXX CFBundle shared module "SwellChain_artefacts/Release/VST3/Swell Chain.vst3/Contents/MacOS/Swell Chain"
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Chain/build-mac/SwellChain_artefacts/Release/VST3/Swell Chain.vst3: code object is not signed at all
+-- Replacing invalid signature with ad-hoc signature
+/Users/sevyondatracks/Desktop/Swell-Audio/Swell-Chain/build-mac/SwellChain_artefacts/Release/VST3/Swell Chain.vst3: replacing existing signature
+removing moduleinfo.json
+creating /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Chain/build-mac/SwellChain_artefacts/Release/VST3/Swell Chain.vst3/Contents/Resources/moduleinfo.json
+[100%] Built target SwellChain_VST3
+Test project /Users/sevyondatracks/Desktop/Swell-Audio/Swell-Chain/build-mac
+    Start 1: ChainDSP
+1/1 Test #1: ChainDSP .........................   Passed    6.97 sec
+
+100% tests passed out of 1
+
+Total Test time (real) =   6.97 sec
+./build-mac.sh   225.06s user 12.63s system 321% cpu 1:13.91 total
