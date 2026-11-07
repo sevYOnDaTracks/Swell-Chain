@@ -227,6 +227,7 @@ void ChainProcessor::loadUserChain (const juce::ValueTree& t)
     userName = t.getProperty ("name").toString();
     setSolo (-1);
     applyVoice();
+    engine.requestFastAdapt();
 }
 
 //==============================================================================
@@ -263,6 +264,7 @@ void ChainProcessor::loadChain (int index)
     for (int s = 0; s < chain::slotCount; ++s) writeSlot (s, slots[(size_t) s]);
     setSolo (-1);
     applyVoice();
+    engine.requestFastAdapt();
 }
 
 const juce::String ChainProcessor::getProgramName (int index)
@@ -293,6 +295,7 @@ void ChainProcessor::setModulePreset (int s, int preset)
     st.preset = preset;
     st.knobs = chain::presetKnobs (st.type, preset);
     writeSlot (s, st);
+    engine.requestFastAdapt();
 }
 
 void ChainProcessor::setKnob (int s, int k, float realValue)
@@ -369,6 +372,7 @@ void ChainProcessor::switchAB (int which)
     slotsAB[ab] = captureChain();
     ab = which;
     applyChain (slotsAB[ab]);
+    engine.requestFastAdapt();
 }
 
 //==============================================================================

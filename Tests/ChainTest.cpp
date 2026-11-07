@@ -164,6 +164,26 @@ int main()
         check (ok, "changements de presets et de place en cours de lecture");
     }
 
+    // 8. After a chain change, Volume auto catches up within a second: no level jump.
+    {
+        Engine e; e.prepare (48000, 512);
+        ChainSettings c; c.autoGain = true;
+        c.slots = slotsFor (chainPresets()[0]);
+        auto in = voice (48000, 4.0, 13);
+        run (e, in, c);
+        double worst = 0;
+        for (int target : { 23, 16, 6, 2 })   // Rage Scream, Afro Bounce, R&B Silk, Trap Ad-libs
+        {
+            c.slots = slotsFor (chainPresets()[(size_t) target]);
+            e.requestFastAdapt();
+            auto r = run (e, voice (48000, 2.0, 17 + (unsigned) target), c);
+            const size_t from = 48000 / 2, to = r.left.size();
+            const auto reference = voice (48000, 2.0, 17 + (unsigned) target);
+            worst = std::max (worst, std::abs (rmsDb (r.left, from, to) - rmsDb (reference, from, to)));
+        }
+        check (worst < 4, "changement de chaîne : écart de niveau max après 0,5 s (dB)", worst);
+    }
+
     std::printf (failures ? "\n%d test(s) en échec\n" : "\nTous les tests passent\n", failures);
     return failures ? 1 : 0;
 }

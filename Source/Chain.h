@@ -157,6 +157,9 @@ public:
         primed = false;
         inEnergy = outEnergy = 0; autoDb = 0;
         energyCoeff = (float) std::exp (-1.0 / (1.5 * rate));
+        fastCoeff = (float) std::exp (-1.0 / (0.12 * rate));
+        fastLength = (int) (1.2 * rate);
+        fastLeft = 0;
     }
 
     int latency() const { return perSlot * slotCount; }
@@ -206,7 +209,11 @@ public:
                 slots[(size_t) s].process (l, r, n, slot, active, context);
             }
 
-            // Volume auto: the processed level follows the input level, slowly, while there is sound.
+            // Volume auto: the processed level follows the input level, slowly, while there is sound;
+            // just after a chain or preset change it catches up quickly, so a new chain never jumps out.
+            if (fastRequest.exchange (false)) fastLeft = fastLength;
+            const bool fast = fastLeft > 0;
+            const float ec = fast ? fastCoeff : energyCoeff;
             for (int i = 0; i < n; ++i)
             {
                 const float m = mix.getNextValue();
@@ -214,16 +221,17 @@ public:
                 r[i] = dryR[(size_t) i] + (r[i] - dryR[(size_t) i]) * m;
                 const float xin = 0.5f * (dryL[(size_t) i] * dryL[(size_t) i] + dryR[(size_t) i] * dryR[(size_t) i]);
                 const float xout = 0.5f * (l[i] * l[i] + r[i] * r[i]);
-                inEnergy = energyCoeff * inEnergy + (1 - energyCoeff) * xin;
-                outEnergy = energyCoeff * outEnergy + (1 - energyCoeff) * xout;
+                inEnergy = ec * inEnergy + (1 - ec) * xin;
+                outEnergy = ec * outEnergy + (1 - ec) * xout;
             }
             if (c.autoGain && inEnergy > 1.0e-7f && outEnergy > 1.0e-9f)
             {
                 const float wanted = juce::jlimit (-24.0f, 12.0f, 10.0f * std::log10 (inEnergy / outEnergy));
-                autoDb += 0.02f * (wanted - autoDb);
+                autoDb += (fast ? 0.3f : 0.02f) * (wanted - autoDb);
             }
             else if (! c.autoGain)
                 autoDb += 0.05f * (0.0f - autoDb);
+            if (fastLeft > 0) fastLeft -= n;
             gain.setTargetValue (juce::Decibels::decibelsToGain (c.outputDb + autoDb));
 
             for (int i = 0; i < n; ++i)
@@ -248,6 +256,8 @@ public:
     }
 
     float autoGainDb() const { return autoDb; }
+    /** Lets Volume auto catch up quickly for a moment (after loading a chain or a preset). */
+    void requestFastAdapt() { fastRequest = true; }
     std::atomic<float> inputPeak { 0 }, outputPeak { 0 };
 
 private:
@@ -257,7 +267,9 @@ private:
     juce::SmoothedValue<float> mix, gain, bypassFade, input;
     double sampleRate = 48000;
     int block = 512, perSlot = 0;
-    float inEnergy = 0, outEnergy = 0, autoDb = 0, energyCoeff = 0.9999f;
+    float inEnergy = 0, outEnergy = 0, autoDb = 0, energyCoeff = 0.9999f, fastCoeff = 0.999f;
+    int fastLength = 48000, fastLeft = 0;
+    std::atomic<bool> fastRequest { false };
     bool primed = false;
 };
 } // namespace chain
