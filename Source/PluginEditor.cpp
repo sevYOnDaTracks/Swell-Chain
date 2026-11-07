@@ -347,8 +347,11 @@ void SlotCard::paint (juce::Graphics& g)
     g.setColour (colour.withAlpha (active ? 0.14f : 0.06f));
     g.fillRoundedRectangle (iconBox, 10);
     drawModuleIcon (g, s.type, iconBox.reduced (9), active ? colour : colour.withAlpha (0.35f), 2.0f);
+    g.setColour (active ? colours::text : juce::Colour (0xff7d8492));
+    g.setFont (font (15, true));
+    g.drawText (fr (info.name), 14, 76, getWidth() - 28, 20, juce::Justification::centredLeft, true);
 
-    auto presetRow = juce::Rectangle<float> (13, 84, (float) getWidth() - 26, 28);
+    auto presetRow = juce::Rectangle<float> (13, 102, (float) getWidth() - 26, 28);
     g.setColour (juce::Colour (0xff13161b));
     g.fillRoundedRectangle (presetRow, 6);
     g.setColour (colours::border);
@@ -365,7 +368,7 @@ void SlotCard::paint (juce::Graphics& g)
     {
         const auto& spec = info.knobs[(size_t) k];
         const float cx = shown == 1 ? getWidth() / 2.0f : getWidth() * (k == 0 ? 0.3f : 0.7f);
-        auto dial = juce::Rectangle<float> (cx - 26, 122, 52, 52);
+        auto dial = juce::Rectangle<float> (cx - 25, 140, 50, 50);
         arc (g, dial, (s.knobs[(size_t) k] - spec.min) / (spec.max - spec.min), active ? colour : juce::Colour (0xff4a4558), 4.5f);
         g.setColour (juce::Colour (0xff1d2027));
         g.fillEllipse (dial.reduced (11));
