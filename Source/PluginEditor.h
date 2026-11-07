@@ -27,12 +27,29 @@ public:
 
 /** Formats a knob value in its unit, in French. */
 juce::String formatValue (const chain::KnobSpec&, float real);
+
+/** The icon of a module, drawn as strokes on a 24 x 24 grid scaled into r. */
+void drawModuleIcon (juce::Graphics&, chain::Type, juce::Rectangle<float> r, juce::Colour, float stroke = 2.0f);
+
+enum class Glyph { power, solo, close, analyse };
+void drawGlyph (juce::Graphics&, Glyph, juce::Rectangle<float> r, juce::Colour, float stroke = 2.0f);
+
+/** A small square button that shows a glyph instead of text. */
+class IconButton final : public juce::Button
+{
+public:
+    IconButton (const juce::String& name, Glyph g) : juce::Button (name), glyph (g) { setTooltip (name); }
+    void paintButton (juce::Graphics&, bool over, bool down) override;
+    juce::Colour onColour { 0xff8fe3b0 };
+private:
+    Glyph glyph;
+};
 }
 
 class ChainEditor;
 
 /** One slot of the chain: a module card, or an empty place to add one. */
-class SlotCard final : public juce::Component
+class SlotCard final : public juce::Component, public juce::SettableTooltipClient
 {
 public:
     SlotCard (ChainEditor&, ChainProcessor&, int index);
@@ -47,7 +64,8 @@ public:
 private:
     ChainEditor& editor;
     ChainProcessor& processor;
-    juce::TextButton onButton, soloButton, removeButton;
+    ui::IconButton onButton { "On / Off", ui::Glyph::power }, soloButton { juce::String::fromUTF8 ("Écouter seul"), ui::Glyph::solo },
+        removeButton { "Retirer", ui::Glyph::close };
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> onAttachment;
     bool dragging = false;
 };
@@ -153,8 +171,9 @@ private:
     juce::OwnedArray<SlotCard> cards;
     juce::OwnedArray<KnobView> knobs;
     juce::ComboBox modulePreset;
-    juce::TextButton removeModule { "Retirer" };
-    juce::TextButton autoGain { "Volume auto" };
+    ui::IconButton removeModule { "Retirer le module", ui::Glyph::close };
+    juce::TextButton autoGain { "AUTO" };
+    juce::TooltipWindow tooltips { this, 500 };
     juce::Slider mix, gain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassAttachment, autoGainAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mixAttachment, gainAttachment;
@@ -165,6 +184,6 @@ private:
     chain::Type detailType = chain::Type::empty;
     int detailFor = -1;
     float inLevel = 0, outLevel = 0, progress = 0;
-    juce::String findings;
+    juce::StringArray findings;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChainEditor)
 };

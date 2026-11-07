@@ -139,17 +139,154 @@ juce::String ui::formatValue (const chain::KnobSpec& s, float v)
 }
 
 //==============================================================================
+namespace
+{
+/** Maps a point of the 24 x 24 icon grid into r. */
+struct Grid
+{
+    juce::Rectangle<float> r;
+    juce::Point<float> operator() (float x, float y) const { return { r.getX() + x * r.getWidth() / 24, r.getY() + y * r.getHeight() / 24 }; }
+    float s (float v) const { return v * r.getWidth() / 24; }
+};
+
+void stroke (juce::Graphics& g, const juce::Path& p, float width)
+{
+    g.strokePath (p, juce::PathStrokeType (width, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
+}
+}
+
+void ui::drawModuleIcon (juce::Graphics& g, chain::Type t, juce::Rectangle<float> r, juce::Colour c, float w)
+{
+    const Grid P { r };
+    w = P.s (w);
+    juce::Path p;
+    g.setColour (c);
+    switch (t)
+    {
+        case chain::Type::match:   // an EQ curve with two points
+            p.startNewSubPath (P (2, 15));
+            p.cubicTo (P (6, 15), P (7, 7), P (10, 7));
+            p.cubicTo (P (13, 7), P (13, 17), P (16, 17));
+            p.cubicTo (P (19, 17), P (20, 11), P (22, 11));
+            stroke (g, p, w);
+            g.fillEllipse (juce::Rectangle<float> (P.s (4.4f), P.s (4.4f)).withCentre (P (10, 7)));
+            g.fillEllipse (juce::Rectangle<float> (P.s (4.4f), P.s (4.4f)).withCentre (P (16, 17)));
+            break;
+        case chain::Type::vox:     // a microphone
+            p.addRoundedRectangle (juce::Rectangle<float> (P (9, 2.5f), P (15, 14)), P.s (3));
+            p.startNewSubPath (P (5.5f, 11));
+            p.cubicTo (P (5.5f, 19.5f), P (18.5f, 19.5f), P (18.5f, 11));
+            p.startNewSubPath (P (12, 17.5f)); p.lineTo (P (12, 21.5f));
+            p.startNewSubPath (P (8.5f, 21.5f)); p.lineTo (P (15.5f, 21.5f));
+            stroke (g, p, w);
+            break;
+        case chain::Type::lift:    // an arrow going up, over a line
+            p.startNewSubPath (P (12, 18)); p.lineTo (P (12, 4));
+            p.startNewSubPath (P (6.5f, 9.5f)); p.lineTo (P (12, 4)); p.lineTo (P (17.5f, 9.5f));
+            p.startNewSubPath (P (5, 21)); p.lineTo (P (19, 21));
+            stroke (g, p, w);
+            break;
+        case chain::Type::adlib:   // a speech bubble
+            p.startNewSubPath (P (7, 4));
+            p.lineTo (P (17, 4)); p.quadraticTo (P (21, 4), P (21, 8));
+            p.lineTo (P (21, 12)); p.quadraticTo (P (21, 16), P (17, 16));
+            p.lineTo (P (11, 16)); p.lineTo (P (6.5f, 20.5f)); p.lineTo (P (7, 16));
+            p.quadraticTo (P (3, 16), P (3, 12)); p.lineTo (P (3, 8)); p.quadraticTo (P (3, 4), P (7, 4));
+            p.closeSubPath();
+            stroke (g, p, w);
+            for (float x : { 8.0f, 12.0f, 16.0f }) g.fillEllipse (juce::Rectangle<float> (P.s (2.6f), P.s (2.6f)).withCentre (P (x, 10)));
+            break;
+        case chain::Type::space:   // a source and its echoes
+        {
+            g.fillEllipse (juce::Rectangle<float> (P.s (5), P.s (5)).withCentre (P (5, 12)));
+            const auto centre = P (5, 12);
+            float alpha = 1;
+            for (float radius : { 6.5f, 11.5f, 16.5f })
+            {
+                juce::Path a;
+                a.addCentredArc (centre.x, centre.y, P.s (radius), P.s (radius), 0,
+                                 juce::MathConstants<float>::halfPi - 0.75f, juce::MathConstants<float>::halfPi + 0.75f, true);
+                g.setColour (c.withAlpha (alpha));
+                stroke (g, a, w);
+                alpha -= 0.3f;
+            }
+            break;
+        }
+        case chain::Type::knock:   // a lightning bolt
+            p.startNewSubPath (P (13.5f, 2));
+            p.lineTo (P (5, 13.5f)); p.lineTo (P (11, 13.5f)); p.lineTo (P (10, 22));
+            p.lineTo (P (19, 10)); p.lineTo (P (13, 10)); p.closeSubPath();
+            stroke (g, p, w);
+            break;
+        case chain::Type::glue:    // two arrows squeezing a signal
+            p.startNewSubPath (P (2, 12)); p.lineTo (P (8.5f, 12));
+            p.startNewSubPath (P (5.5f, 8.5f)); p.lineTo (P (8.5f, 12)); p.lineTo (P (5.5f, 15.5f));
+            p.startNewSubPath (P (22, 12)); p.lineTo (P (15.5f, 12));
+            p.startNewSubPath (P (18.5f, 8.5f)); p.lineTo (P (15.5f, 12)); p.lineTo (P (18.5f, 15.5f));
+            p.startNewSubPath (P (11, 6)); p.lineTo (P (11, 18));
+            p.startNewSubPath (P (13, 6)); p.lineTo (P (13, 18));
+            stroke (g, p, w);
+            break;
+        default:
+            break;
+    }
+}
+
+void ui::drawGlyph (juce::Graphics& g, Glyph glyph, juce::Rectangle<float> r, juce::Colour c, float w)
+{
+    const Grid P { r };
+    w = P.s (w);
+    juce::Path p;
+    g.setColour (c);
+    switch (glyph)
+    {
+        case Glyph::power:
+        {
+            const auto centre = P (12, 13);
+            p.addCentredArc (centre.x, centre.y, P.s (7.5f), P.s (7.5f), 0, 0.75f, juce::MathConstants<float>::twoPi - 0.75f, true);
+            p.startNewSubPath (P (12, 3)); p.lineTo (P (12, 11));
+            break;
+        }
+        case Glyph::solo:   // headphones
+        {
+            const auto centre = P (12, 14);
+            p.addCentredArc (centre.x, centre.y, P.s (8), P.s (8), 0, -juce::MathConstants<float>::halfPi, juce::MathConstants<float>::halfPi, true);
+            p.addRoundedRectangle (juce::Rectangle<float> (P (3.5f, 13.5f), P (7.5f, 21)), P.s (1.5f));
+            p.addRoundedRectangle (juce::Rectangle<float> (P (16.5f, 13.5f), P (20.5f, 21)), P.s (1.5f));
+            break;
+        }
+        case Glyph::close:
+            p.startNewSubPath (P (6, 6)); p.lineTo (P (18, 18));
+            p.startNewSubPath (P (18, 6)); p.lineTo (P (6, 18));
+            break;
+        case Glyph::analyse:   // a voice waveform
+            p.startNewSubPath (P (2, 12)); p.lineTo (P (6, 12)); p.lineTo (P (9, 5)); p.lineTo (P (13, 19));
+            p.lineTo (P (16, 12)); p.lineTo (P (22, 12));
+            break;
+    }
+    stroke (g, p, w);
+}
+
+void IconButton::paintButton (juce::Graphics& g, bool over, bool down)
+{
+    auto r = getLocalBounds().toFloat().reduced (0.5f);
+    g.setColour (down ? colours::field.darker (0.1f) : over ? colours::field.brighter (0.06f) : colours::field);
+    g.fillRoundedRectangle (r, 6);
+    g.setColour (getToggleState() ? onColour.withAlpha (0.6f) : juce::Colour (0xff343a46));
+    g.drawRoundedRectangle (r, 6, 1);
+    const float size = std::min (r.getWidth(), r.getHeight()) * 0.62f;
+    drawGlyph (g, glyph, r.withSizeKeepingCentre (size, size), getToggleState() ? onColour : colours::dim, 2.2f);
+}
+
+//==============================================================================
 SlotCard::SlotCard (ChainEditor& e, ChainProcessor& p, int i) : index (i), editor (e), processor (p)
 {
     onButton.setClickingTogglesState (true);
     onAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment> (processor.state, ids::on (i), onButton);
-    soloButton.setButtonText ("S");
-    soloButton.setTooltip (fr ("Écouter ce module seul"));
+    soloButton.onColour = juce::Colour (0xfff2b25c);
     soloButton.onClick = [this] { processor.setSolo (processor.soloSlot() == index ? -1 : index); };
-    removeButton.setButtonText (fr ("×"));
-    removeButton.setTooltip ("Retirer le module");
     removeButton.onClick = [this] { processor.removeSlot (index); editor.select (index); };
-    for (auto* b : { &onButton, &soloButton, &removeButton }) addAndMakeVisible (b);
+    for (auto* b : std::initializer_list<juce::Button*> { &onButton, &soloButton, &removeButton }) addAndMakeVisible (b);
     refresh();
 }
 
@@ -157,19 +294,17 @@ void SlotCard::refresh()
 {
     const auto s = processor.slot (index);
     const bool filled = s.type != chain::Type::empty;
-    for (auto* b : { &onButton, &soloButton, &removeButton }) b->setVisible (filled);
-    onButton.setButtonText (s.on ? "On" : "Off");
-    const bool solo = processor.soloSlot() == index;
-    soloButton.setColour (juce::TextButton::buttonColourId, solo ? juce::Colour (0xfff2b25c) : colours::field);
-    soloButton.setColour (juce::TextButton::textColourOffId, solo ? juce::Colour (0xff1a1209) : colours::dim);
+    for (auto* b : std::initializer_list<juce::Button*> { &onButton, &soloButton, &removeButton }) b->setVisible (filled);
+    soloButton.setToggleState (processor.soloSlot() == index, juce::dontSendNotification);
+    setTooltip (filled ? fr (chain::info (s.type).name) : fr ("Ajouter un module"));
     repaint();
 }
 
 void SlotCard::resized()
 {
-    onButton.setBounds (getWidth() - 56, 22, 44, 24);
-    soloButton.setBounds (getWidth() - 42, getHeight() - 32, 30, 22);
-    removeButton.setBounds (getWidth() - 78, getHeight() - 32, 30, 22);
+    onButton.setBounds (getWidth() - 42, 22, 30, 30);
+    soloButton.setBounds (getWidth() - 42, getHeight() - 38, 30, 28);
+    removeButton.setBounds (getWidth() - 78, getHeight() - 38, 30, 28);
 }
 
 void SlotCard::paint (juce::Graphics& g)
@@ -187,15 +322,14 @@ void SlotCard::paint (juce::Graphics& g)
         juce::PathStrokeType (2).createDashedStroke (dashed, outline, dashes, 2);
         g.setColour (drop || selected ? colours::accent : juce::Colour (0xff353b47));
         g.fillPath (dashed);
-        auto c = r.withSizeKeepingCentre (38, 38).translated (0, -14);
+        auto c = r.withSizeKeepingCentre (52, 52);
         g.setColour (colours::field);
         g.fillEllipse (c);
-        g.setColour (colours::text);
-        g.setFont (font (22));
-        g.drawText ("+", c, juce::Justification::centred);
         g.setColour (colours::dim);
-        g.setFont (font (13, true));
-        g.drawText ("Ajouter un module", r.withTrimmedTop (r.getHeight() / 2 + 14).withHeight (20), juce::Justification::centred);
+        juce::Path plus;
+        plus.startNewSubPath (c.getCentreX() - 10, c.getCentreY()); plus.lineTo (c.getCentreX() + 10, c.getCentreY());
+        plus.startNewSubPath (c.getCentreX(), c.getCentreY() - 10); plus.lineTo (c.getCentreX(), c.getCentreY() + 10);
+        g.strokePath (plus, juce::PathStrokeType (2.5f, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
         return;
     }
     const auto& info = chain::info (s.type);
@@ -208,15 +342,11 @@ void SlotCard::paint (juce::Graphics& g)
     g.setColour (colour.withAlpha (active ? 1.0f : 0.3f));
     g.fillRoundedRectangle (r.getX() + 13, r.getY() + 11, r.getWidth() - 26, 4, 2);
 
-    g.setColour (colours::faint);
-    g.setFont (font (11, true));
-    g.drawText (juce::String (index + 1), 14, 22, 30, 14, juce::Justification::left);
-    g.setColour (active ? colours::text : juce::Colour (0xff7d8492));
-    g.setFont (font (16, true));
-    g.drawText (fr (info.name), 14, 36, getWidth() - 70, 22, juce::Justification::left);
-    g.setColour (colours::dim);
-    g.setFont (font (12));
-    g.drawText (fr (info.role), 14, 58, getWidth() - 28, 16, juce::Justification::left);
+    // The module's icon stands for its name (shown in the tooltip and in the settings panel).
+    auto iconBox = juce::Rectangle<float> (14, 26, 46, 46);
+    g.setColour (colour.withAlpha (active ? 0.14f : 0.06f));
+    g.fillRoundedRectangle (iconBox, 10);
+    drawModuleIcon (g, s.type, iconBox.reduced (9), active ? colour : colour.withAlpha (0.35f), 2.0f);
 
     auto presetRow = juce::Rectangle<float> (13, 84, (float) getWidth() - 26, 28);
     g.setColour (juce::Colour (0xff13161b));
@@ -242,13 +372,12 @@ void SlotCard::paint (juce::Graphics& g)
         g.setColour (colours::text);
         g.setFont (font (11, true));
         g.drawText (formatValue (spec, s.knobs[(size_t) k]).upToFirstOccurrenceOf (" ", false, false), dial, juce::Justification::centred);
-        g.setColour (colours::faint);
-        g.setFont (font (11));
-        g.drawText (fr (spec.label), (int) cx - 45, 176, 90, 14, juce::Justification::centred);
     }
+    // Drag handle: six dots.
     g.setColour (colours::faint);
-    g.setFont (font (12, true));
-    g.drawText (fr ("⋮⋮"), 12, getHeight() - 31, 30, 20, juce::Justification::centredLeft);
+    for (int row = 0; row < 3; ++row)
+        for (int col = 0; col < 2; ++col)
+            g.fillEllipse (16.0f + (float) col * 6, (float) getHeight() - 30 + (float) row * 6, 3, 3);
 }
 
 void SlotCard::mouseDown (const juce::MouseEvent&) { dragging = false; }
@@ -469,10 +598,7 @@ void ModulesPage::paint (juce::Graphics& g)
         auto top = r.withHeight (180).reduced (1);
         g.setColour (c.withAlpha (0.12f));
         g.fillRoundedRectangle (top, 13);
-        auto dial = top.withSizeKeepingCentre (90, 90);
-        arc (g, dial, 0.6f, c, 5);
-        g.setColour (juce::Colour (0xff1d2027));
-        g.fillEllipse (dial.reduced (15));
+        drawModuleIcon (g, type, top.withSizeKeepingCentre (84, 84), c, 1.8f);
         g.setColour (colours::text);
         g.setFont (font (17, true));
         g.drawText (fr (chain::info (type).name), (int) r.getX() + 18, (int) r.getY() + 196, (int) r.getWidth() - 70, 40, juce::Justification::centredLeft);
@@ -583,7 +709,7 @@ void ChainEditor::resized()
     const int w = (1224 - 5 * 22) / 6;
     for (int s = 0; s < chain::slotCount; ++s) cards[s]->setBounds (28 + s * (w + 22), 148, w, 238);
     modulePreset.setBounds (400, 418, 260, 34);
-    removeModule.setBounds (848, 418, 80, 34);
+    removeModule.setBounds (894, 418, 34, 34);
     for (int i = 0; i < knobs.size(); ++i)
     {
         const int n = knobs.size(), area = 916 - 44, kw = std::min (150, area / n);
@@ -639,19 +765,32 @@ void ChainEditor::paint (juce::Graphics& g)
     g.setColour (colours::line);
     g.drawHorizontalLine (76, 0, 1280);
 
-    // Analysis row
-    g.setFont (font (13));
-    g.setColour (juce::Colour (0xffb9c0cc));
-    juce::String status;
-    if (processor.isRecording()) status = fr ("Analyse : chante ou lance ta piste voix. Seuls les passages avec du son comptent.");
-    else if (processor.isAnalysing()) status = "Analyse en cours...";
-    else if (processor.isAnalysed()) status = fr ("Analyse faite : ") + findings + fr (". Vocal Match s’est réglé sur ta voix.");
-    else status = fr ("Lance l’analyse pour que Vocal Match règle la chaîne sur ta voix.");
-    g.drawFittedText (status, 488, 88, 620, 44, juce::Justification::centredLeft, 2);
-    g.setColour (colours::faint);
-    g.setFont (font (12));
-    const double ms = 1000.0 * processor.latencySamples() / std::max (1.0, processor.currentRate());
-    g.drawText ("Latence " + juce::String (ms, 1).replaceCharacter ('.', ',') + " ms", 1120, 90, 132, 40, juce::Justification::centredRight);
+    // Analysis row: a progress bar while listening, then what was found, as small tags.
+    if (processor.isAnalysing())
+    {
+        auto bar = juce::Rectangle<float> (488, 107, 360, 6);
+        g.setColour (juce::Colour (0xff23272f));
+        g.fillRoundedRectangle (bar, 3);
+        g.setColour (colours::accent);
+        g.fillRoundedRectangle (bar.withWidth (bar.getWidth() * progress), 3);
+    }
+    else if (processor.isAnalysed())
+    {
+        float x = 488;
+        g.setFont (font (12, true));
+        for (const auto& tag : findings)
+        {
+            const float w = juce::GlyphArrangement::getStringWidth (font (12, true), tag) + 22;
+            if (x + w > 1240) break;
+            g.setColour (juce::Colour (0xff1f232b));
+            g.fillRoundedRectangle (x, 96, w, 28, 14);
+            g.setColour (juce::Colour (0xff343a46));
+            g.drawRoundedRectangle (x + 0.5f, 96.5f, w - 1, 27, 14, 1);
+            g.setColour (juce::Colour (0xffd5dae3));
+            g.drawText (tag, (int) x, 96, (int) w, 28, juce::Justification::centred);
+            x += w + 8;
+        }
+    }
 
     // Arrows between cards
     const int w = (1224 - 5 * 22) / 6;
@@ -672,23 +811,16 @@ void ChainEditor::paint (juce::Graphics& g)
     g.fillRoundedRectangle (detail, 12);
     g.setColour (s.type == chain::Type::empty ? colours::border : moduleColour (s.type));
     g.drawRoundedRectangle (detail.reduced (0.5f), 12, 1);
-    if (s.type == chain::Type::empty)
+    if (s.type != chain::Type::empty)
     {
-        g.setColour (colours::dim);
-        g.setFont (font (14));
-        g.drawText (fr ("Emplacement vide : clique sur « Ajouter un module »."), detail, juce::Justification::centred);
-    }
-    else
-    {
-        g.setColour (moduleColour (s.type));
-        g.fillEllipse (50, 430, 10, 10);
+        const auto colour = moduleColour (s.type);
+        auto iconBox = juce::Rectangle<float> (48, 416, 38, 38);
+        g.setColour (colour.withAlpha (0.14f));
+        g.fillRoundedRectangle (iconBox, 9);
+        drawModuleIcon (g, s.type, iconBox.reduced (8), colour, 2.0f);
         g.setColour (colours::text);
         g.setFont (font (20, true));
-        g.drawText (fr (chain::info (s.type).name), 70, 418, 300, 34, juce::Justification::centredLeft);
-        g.setColour (colours::dim);
-        g.setFont (font (13));
-        if (chain::info (s.type).presets.empty())
-            g.drawText (fr (chain::info (s.type).role), 400, 418, 300, 34, juce::Justification::centredLeft);
+        g.drawText (fr (chain::info (s.type).name), 98, 418, 290, 34, juce::Justification::centredLeft);
     }
 
     // Output panel
@@ -715,14 +847,20 @@ void ChainEditor::paint (juce::Graphics& g)
     meter (990, inLevel, "IN");
     meter (1024, outLevel, "OUT");
     g.setColour (colours::dim);
-    g.setFont (font (12));
-    auto dbText = [] (float level) { return level < 0.001f ? fr ("−∞") : juce::String (juce::Decibels::gainToDecibels (level), 1).replaceCharacter ('.', ',') + " dB"; };
-    g.drawText ("Sortie " + dbText (outLevel), 1062, 500, 180, 18, juce::Justification::left);
-    g.drawText (fr ("Volume auto ") + juce::String (processor.autoGainDb(), 1).replaceCharacter ('.', ',') + " dB", 1062, 524, 180, 18, juce::Justification::left);
-    g.drawText (fr ("Mix de la chaîne"), 984, 596, 160, 18, juce::Justification::left);
+    g.setFont (font (11, true));
+    g.drawText ("MIX", 984, 596, 100, 18, juce::Justification::left);
+    g.drawText ("GAIN", 984, 648, 100, 18, juce::Justification::left);
+    g.setColour (colours::text);
+    g.setFont (font (12, true));
     g.drawText (juce::String (juce::roundToInt (mix.getValue())) + " %", 1132, 596, 100, 18, juce::Justification::right);
-    g.drawText ("Gain de sortie", 984, 648, 160, 18, juce::Justification::left);
     g.drawText ((gain.getValue() > 0.05 ? "+" : "") + juce::String (gain.getValue(), 1).replaceCharacter ('.', ',') + " dB", 1132, 648, 100, 18, juce::Justification::right);
+    if (autoGain.getToggleState())
+    {
+        g.setColour (colours::dim);
+        g.setFont (font (12, true));
+        g.drawText ((processor.autoGainDb() > 0.05f ? "+" : "") + juce::String (processor.autoGainDb(), 1).replaceCharacter ('.', ',') + " dB",
+                    1112, 490, 120, 18, juce::Justification::centred);
+    }
 
     // Footer
     g.setColour (colours::line);
@@ -809,14 +947,14 @@ void ChainEditor::timerCallback()
     outLevel = std::max (processor.takeOutputPeak(), outLevel * 0.85f);
     if (processor.isAnalysed())
     {
-        juce::StringArray parts;
-        for (const auto& line : vm::describe (processor.analysisResult())) parts.add (fr (line.c_str()));
-        findings = parts.joinIntoString (", ");
+        findings.clear();
+        for (const auto& line : vm::describe (processor.analysisResult()))
+            findings.add (fr (line.c_str()).replace (fr ("Résonance vers "), fr ("Résonance ")));
     }
     progress = processor.analysisProgress();
-    analyse.setButtonText (processor.isRecording() ? fr ("Analyse… ") + juce::String (juce::roundToInt (progress * 100)) + " %"
-                           : processor.isAnalysing() ? fr ("Calcul…")
-                           : processor.isAnalysed() ? fr ("Relancer l’analyse") : fr ("Analyser ma voix"));
+    analyse.setButtonText (processor.isRecording() ? juce::String (juce::roundToInt (progress * 100)) + " %"
+                           : processor.isAnalysing() ? fr ("…")
+                           : processor.isAnalysed() ? fr ("Relancer") : fr ("Analyser ma voix"));
     const int voiceType = juce::roundToInt (processor.state.getRawParameterValue (ids::voiceType)->load());
     for (int i = 0; i < 3; ++i) styleButton (voice[i], i == voiceType);
     styleButton (slotA, processor.activeSlotAB() == 0);
