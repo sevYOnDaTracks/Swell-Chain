@@ -21,6 +21,7 @@ struct ChainSettings
     int solo = -1;            // slot heard alone, -1: none
     float mix = 1;            // 0..1
     float outputDb = 0;
+    float inputDb = 0;        // trim before the chain, set by the analysis
     bool autoGain = true;
     bool bypass = false;
     int voiceType = 1;
@@ -152,7 +153,7 @@ public:
         for (auto& s : slots) s.setLatency (perSlot);
         inputDelay.prepare (perSlot * slotCount);
         dryL.assign ((size_t) block, 0.0f); dryR.assign ((size_t) block, 0.0f);
-        mix.reset (rate, 0.03); gain.reset (rate, 0.05); bypassFade.reset (rate, 0.02);
+        mix.reset (rate, 0.03); gain.reset (rate, 0.05); bypassFade.reset (rate, 0.02); input.reset (rate, 0.05);
         primed = false;
         inEnergy = outEnergy = 0; autoDb = 0;
         energyCoeff = (float) std::exp (-1.0 / (1.5 * rate));
@@ -174,10 +175,12 @@ public:
             mix.setCurrentAndTargetValue (c.mix);
             gain.setCurrentAndTargetValue (juce::Decibels::decibelsToGain (c.outputDb));
             bypassFade.setCurrentAndTargetValue (c.bypass ? 1.0f : 0.0f);
+            input.setCurrentAndTargetValue (juce::Decibels::decibelsToGain (c.inputDb));
             primed = true;
         }
         mix.setTargetValue (c.mix);
         bypassFade.setTargetValue (c.bypass ? 1.0f : 0.0f);
+        input.setTargetValue (juce::Decibels::decibelsToGain (c.inputDb));
         for (int start = 0; start < numSamples; start += block)
         {
             const int n = std::min (block, numSamples - start);
@@ -188,6 +191,7 @@ public:
             std::copy (l, l + n, dryL.begin());
             std::copy (r, r + n, dryR.begin());
             inputDelay.process (dryL.data(), dryR.data(), n);
+            for (int i = 0; i < n; ++i) { const float g = input.getNextValue(); l[i] *= g; r[i] *= g; }
 
             for (int s = 0; s < slotCount; ++s)
             {
@@ -250,7 +254,7 @@ private:
     std::array<Slot, slotCount> slots;
     Delay inputDelay;
     std::vector<float> dryL, dryR;
-    juce::SmoothedValue<float> mix, gain, bypassFade;
+    juce::SmoothedValue<float> mix, gain, bypassFade, input;
     double sampleRate = 48000;
     int block = 512, perSlot = 0;
     float inEnergy = 0, outEnergy = 0, autoDb = 0, energyCoeff = 0.9999f;

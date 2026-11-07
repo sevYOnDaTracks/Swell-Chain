@@ -452,11 +452,94 @@ void KnobView::paintOverChildren (juce::Graphics& g)
 }
 
 //==============================================================================
+void SpectrumView::update (ChainProcessor& p)
+{
+    rate = p.currentRate();
+    for (int w = 0; w < 2; ++w)
+    {
+        const int got = p.readScope (w == 1, incoming.data(), (int) incoming.size());
+        auto& h = history[(size_t) w];
+        if (got >= size) std::copy (incoming.begin() + (got - size), incoming.begin() + got, h.begin());
+        else if (got > 0)
+        {
+            std::move (h.begin() + got, h.end(), h.begin());
+            std::copy (incoming.begin(), incoming.begin() + got, h.end() - got);
+        }
+        std::fill (work.begin(), work.end(), 0.0f);
+        std::copy (h.begin(), h.end(), work.begin());
+        window.multiplyWithWindowingTable (work.data(), (size_t) size);
+        fft.performFrequencyOnlyForwardTransform (work.data());
+        auto& l = levels[(size_t) w];
+        for (int b = 0; b < bins; ++b)
+        {
+            const float db = juce::Decibels::gainToDecibels (work[(size_t) b] / (float) size * 4.0f, -100.0f);
+            l[(size_t) b] = db > l[(size_t) b] ? 0.5f * l[(size_t) b] + 0.5f * db : 0.85f * l[(size_t) b] + 0.15f * db;
+        }
+    }
+    repaint();
+}
+
+void SpectrumView::paint (juce::Graphics& g)
+{
+    auto r = getLocalBounds().toFloat();
+    const float lowHz = 30, highHz = 16000, top = -12, bottom = -96;
+    auto xOf = [&] (float hz) { return r.getX() + r.getWidth() * std::log (hz / lowHz) / std::log (highHz / lowHz); };
+    auto yOf = [&] (float db) { return r.getY() + r.getHeight() * (top - juce::jlimit (bottom, top, db)) / (top - bottom); };
+    g.setColour (juce::Colour (0xff13161b));
+    g.fillRoundedRectangle (r, 8);
+    g.setFont (font (11));
+    for (float hz : { 100.0f, 1000.0f, 10000.0f })
+    {
+        g.setColour (juce::Colour (0xff23272f));
+        g.drawVerticalLine ((int) xOf (hz), r.getY(), r.getBottom());
+        g.setColour (colours::faint);
+        g.drawText (hz >= 1000 ? juce::String ((int) hz / 1000) + "k" : juce::String ((int) hz), (int) xOf (hz) + 4, (int) r.getBottom() - 18, 40, 14, juce::Justification::left);
+    }
+    for (int w = 0; w < 2; ++w)
+    {
+        juce::Path path;
+        bool started = false;
+        for (int b = 1; b < bins; ++b)
+        {
+            const float hz = (float) b * (float) rate / (float) size;
+            if (hz < lowHz || hz > highHz) continue;
+            const auto pt = juce::Point<float> (xOf (hz), yOf (levels[(size_t) w][(size_t) b]));
+            if (! started) { path.startNewSubPath (pt); started = true; } else path.lineTo (pt);
+        }
+        if (! started) continue;
+        if (w == 1)
+        {
+            juce::Path fill (path);
+            fill.lineTo (r.getRight(), r.getBottom()); fill.lineTo (r.getX(), r.getBottom()); fill.closeSubPath();
+            g.setColour (colours::accent.withAlpha (0.12f));
+            g.fillPath (fill);
+        }
+        g.setColour (w == 0 ? juce::Colour (0xff7d8492) : colours::accent);
+        g.strokePath (path, juce::PathStrokeType (w == 0 ? 1.4f : 2.0f));
+    }
+    g.setFont (font (12, true));
+    g.setColour (juce::Colour (0xff9aa2b1));
+    g.drawText ("Avant", (int) r.getRight() - 150, (int) r.getY() + 8, 60, 16, juce::Justification::right);
+    g.setColour (colours::accent);
+    g.drawText (fr ("Après"), (int) r.getRight() - 80, (int) r.getY() + 8, 66, 16, juce::Justification::right);
+}
+
 PresetsPage::PresetsPage (ChainEditor& e, ChainProcessor& p) : editor (e), processor (p)
 {
     close.onClick = [this] { editor.closePages(); };
-    addAndMakeVisible (close);
-    for (auto name : { "Tous", "Trap", "R&B", "Rap", "Afro", "Drill", "Rage", "FX", "Topline" })
+    nameField.setTextToShowWhenEmpty (fr ("Nom de ta chaîne"), colours::faint);
+    nameField.setColour (juce::TextEditor::backgroundColourId, colours::field);
+    nameField.setColour (juce::TextEditor::outlineColourId, juce::Colour (0xff343a46));
+    nameField.setColour (juce::TextEditor::focusedOutlineColourId, colours::accent);
+    nameField.setColour (juce::TextEditor::textColourId, colours::text);
+    nameField.setFont (font (14));
+    nameField.setIndents (10, 8);
+    nameField.onReturnKey = [this] { saveCurrent(); };
+    saveButton.setColour (juce::TextButton::buttonColourId, colours::accent);
+    saveButton.setColour (juce::TextButton::textColourOffId, juce::Colour (0xff1a1209));
+    saveButton.onClick = [this] { saveCurrent(); };
+    for (auto* c : std::initializer_list<juce::Component*> { &close, &nameField, &saveButton }) addAndMakeVisible (c);
+    for (auto name : { "Tous", "Favoris", "Trap", "R&B", "Rap", "Afro", "Drill", "Rage", "FX", "Topline", "Mes chaînes" })
     {
         auto* b = styleButtons.add (new juce::TextButton (fr (name)));
         b->onClick = [this, b] { setStyle (b->getButtonText()); };
@@ -468,13 +551,41 @@ PresetsPage::PresetsPage (ChainEditor& e, ChainProcessor& p) : editor (e), proce
     setStyle ("Tous");
 }
 
-std::vector<int> PresetsPage::visible() const
+void PresetsPage::visibilityChanged()
 {
-    std::vector<int> v;
+    if (! isVisible()) return;
+    library.load();
+    setStyle (style);
+}
+
+std::vector<PresetsPage::Row> PresetsPage::visible() const
+{
+    std::vector<Row> v;
+    if (style == fr ("Mes chaînes"))
+    {
+        for (int i = 0; i < library.chainCount(); ++i) v.push_back ({ true, i });
+        return v;
+    }
     const auto& all = chain::chainPresets();
     for (int i = 0; i < (int) all.size(); ++i)
-        if (style == "Tous" || fr (all[(size_t) i].style) == style) v.push_back (i);
+    {
+        const auto name = fr (all[(size_t) i].name);
+        if (style == "Tous" || (style == "Favoris" && library.isFavourite (name)) || fr (all[(size_t) i].style) == style)
+            v.push_back ({ false, i });
+    }
     return v;
+}
+
+void PresetsPage::saveCurrent()
+{
+    auto name = nameField.getText().trim();
+    if (name.isEmpty()) { nameField.grabKeyboardFocus(); return; }
+    library.saveChain (name, processor.captureChain());
+    nameField.clear();
+    // Load it back so the header shows the saved chain.
+    for (int i = 0; i < library.chainCount(); ++i)
+        if (library.chain (i).getProperty ("name").toString() == name) processor.loadUserChain (library.chain (i));
+    setStyle (fr ("Mes chaînes"));
 }
 
 void PresetsPage::setStyle (const juce::String& s)
@@ -483,11 +594,14 @@ void PresetsPage::setStyle (const juce::String& s)
     for (auto* b : styleButtons) styleButton (*b, b->getButtonText() == style);
     list.setSize (viewport.getWidth() > 0 ? viewport.getWidth() - 10 : 1060, std::max (1, (int) visible().size()) * 40 + 4);
     list.repaint();
+    repaint();
 }
 
 void PresetsPage::resized()
 {
     close.setBounds (getWidth() - 62, 14, 34, 34);
+    saveButton.setBounds (getWidth() - 270, 14, 196, 34);
+    nameField.setBounds (getWidth() - 540, 14, 260, 34);
     int y = 70;
     for (auto* b : styleButtons) { b->setBounds (12, y, 156, 34); y += 38; }
     viewport.setBounds (181, 96, getWidth() - 181, getHeight() - 96);
@@ -508,11 +622,31 @@ void PresetsPage::paint (juce::Graphics& g)
     g.drawVerticalLine (180, 60, (float) getHeight());
     g.setColour (juce::Colour (0xff7d8492));
     g.setFont (font (11, true));
-    g.drawText ("NOM", 200, 64, 200, 28, juce::Justification::centredLeft);
+    g.drawText ("NOM", 230, 64, 200, 28, juce::Justification::centredLeft);
     g.drawText (fr ("CHAÎNE"), 440, 64, 200, 28, juce::Justification::centredLeft);
     g.drawText ("STYLE", getWidth() - 150, 64, 100, 28, juce::Justification::centredLeft);
     g.setColour (colours::line);
     g.drawHorizontalLine (95, 181, (float) getWidth());
+    if (visible().empty())
+    {
+        g.setColour (colours::dim);
+        g.setFont (font (14));
+        g.drawText (style == "Favoris" ? fr ("Clique sur l’étoile d’un preset pour le garder ici.")
+                                       : fr ("Donne un nom à ta chaîne en haut, puis « Enregistrer ma chaîne »."),
+                    181, 120, getWidth() - 181, 40, juce::Justification::centred);
+    }
+}
+
+namespace
+{
+void drawStar (juce::Graphics& g, juce::Rectangle<float> r, bool filled)
+{
+    juce::Path star;
+    star.addStar (r.getCentre(), 5, r.getWidth() * 0.22f, r.getWidth() * 0.5f, 0);
+    g.setColour (filled ? juce::Colour (0xfff2b25c) : juce::Colour (0xff4a5161));
+    if (filled) g.fillPath (star);
+    else g.strokePath (star, juce::PathStrokeType (1.6f, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
+}
 }
 
 void PresetsPage::List::paint (juce::Graphics& g)
@@ -521,21 +655,40 @@ void PresetsPage::List::paint (juce::Graphics& g)
     const auto& all = chain::chainPresets();
     for (int i = 0; i < (int) rows.size(); ++i)
     {
-        const auto& p = all[(size_t) rows[(size_t) i]];
+        const auto& rowInfo = rows[(size_t) i];
         const auto row = juce::Rectangle<int> (0, i * 40, getWidth(), 40);
-        const bool current = rows[(size_t) i] == page.processor.currentChainIndex();
+        juce::String name, styleName;
+        std::vector<chain::Type> types;
+        bool current;
+        if (rowInfo.user)
+        {
+            const auto t = page.library.chain (rowInfo.index);
+            name = t.getProperty ("name").toString();
+            styleName = "Perso";
+            for (auto child : t) if ((int) child.getProperty ("type", 0) > 0) types.push_back ((chain::Type) (int) child.getProperty ("type"));
+            current = page.processor.userChainName() == name;
+        }
+        else
+        {
+            const auto& p = all[(size_t) rowInfo.index];
+            name = fr (p.name);
+            styleName = fr (p.style);
+            for (const auto& step : p.steps) types.push_back (step.type);
+            current = page.processor.userChainName().isEmpty() && rowInfo.index == page.processor.currentChainIndex();
+        }
         if (current) { g.setColour (juce::Colour (0xff232838)); g.fillRect (row); g.setColour (colours::accent); g.fillRect (row.withWidth (3)); }
         else if (i == hover) { g.setColour (juce::Colour (0xff1a1d24)); g.fillRect (row); }
         g.setColour (juce::Colour (0xff1d2027));
         g.drawHorizontalLine (row.getBottom() - 1, 0, (float) getWidth());
+        if (! rowInfo.user) drawStar (g, juce::Rectangle<float> (18, (float) row.getY() + 12, 16, 16), page.library.isFavourite (name));
         g.setColour (colours::text);
         g.setFont (font (14, current));
-        g.drawText (fr (p.name), 19, row.getY(), 230, 40, juce::Justification::centredLeft);
+        g.drawText (name, 49, row.getY(), 200, 40, juce::Justification::centredLeft, true);
         int x = 259;
-        for (const auto& step : p.steps)
+        for (auto type : types)
         {
-            const auto c = moduleColour (step.type);
-            const juce::String label (shortName (step.type));
+            const auto c = moduleColour (type);
+            const juce::String label (shortName (type));
             const int w = (int) juce::GlyphArrangement::getStringWidth (font (11, true), label) + 16;
             g.setColour (c.withAlpha (0.14f));
             g.fillRoundedRectangle ((float) x, (float) row.getY() + 9, (float) w, 22, 4);
@@ -546,7 +699,8 @@ void PresetsPage::List::paint (juce::Graphics& g)
         }
         g.setColour (colours::dim);
         g.setFont (font (12));
-        g.drawText (fr (p.style), getWidth() - 140, row.getY(), 100, 40, juce::Justification::centredLeft);
+        g.drawText (styleName, getWidth() - 140, row.getY(), 80, 40, juce::Justification::centredLeft);
+        if (rowInfo.user) drawGlyph (g, Glyph::close, juce::Rectangle<float> ((float) getWidth() - 44, (float) row.getY() + 12, 16, 16), colours::dim, 2.0f);
     }
 }
 
@@ -557,7 +711,17 @@ void PresetsPage::List::mouseUp (const juce::MouseEvent& e)
     const auto rows = page.visible();
     const int i = e.y / 40;
     if (i < 0 || i >= (int) rows.size()) return;
-    page.processor.loadChain (rows[(size_t) i]);
+    const auto row = rows[(size_t) i];
+    if (row.user)
+    {
+        if (e.x > getWidth() - 56) { page.library.removeChain (row.index); page.setStyle (page.style); return; }
+        page.processor.loadUserChain (page.library.chain (row.index));
+    }
+    else
+    {
+        if (e.x < 44) { page.library.toggleFavourite (fr (chain::chainPresets()[(size_t) row.index].name)); page.setStyle (page.style); return; }
+        page.processor.loadChain (row.index);
+    }
     page.editor.closePages();
 }
 
@@ -689,6 +853,16 @@ ChainEditor::ChainEditor (ChainProcessor& p) : AudioProcessorEditor (p), process
     mixAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment> (processor.state, ids::mix, mix);
     gainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment> (processor.state, ids::output, gain);
     addAndMakeVisible (autoGain);
+    viewButton.setClickingTogglesState (true);
+    viewButton.onClick = [this] { showSpectrum = viewButton.getToggleState(); rebuildDetail(); };
+    addAndMakeVisible (viewButton);
+    addChildComponent (spectrum);
+    inputTrim.setSliderStyle (juce::Slider::LinearHorizontal);
+    inputTrim.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
+    inputTrim.setDoubleClickReturnValue (true, 0);
+    inputTrim.onValueChange = [this] { repaint (960, 404, 292, 300); };
+    inputAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment> (processor.state, ids::input, inputTrim);
+    addAndMakeVisible (inputTrim);
 
     addChildComponent (presets);
     addChildComponent (modules);
@@ -720,6 +894,9 @@ void ChainEditor::resized()
         knobs[i]->setBounds (x0 + i * kw, 476, kw, 150);
     }
     autoGain.setBounds (1112, 452, 120, 32);
+    inputTrim.setBounds (1108, 548, 128, 22);
+    viewButton.setBounds (740, 418, 140, 34);
+    spectrum.setBounds (48, 466, 876, 222);
     mix.setBounds (984, 616, 248, 24);
     gain.setBounds (984, 668, 248, 24);
     presets.setBounds (0, 77, 1280, 683);
@@ -749,16 +926,17 @@ void ChainEditor::paint (juce::Graphics& g)
     g.fillRoundedRectangle (box, 8);
     g.setColour (juce::Colour (0xff343a46));
     g.drawRoundedRectangle (box.reduced (0.5f), 8, 1);
-    const auto style = styleUpper (preset.style);
+    const bool user = processor.userChainName().isNotEmpty();
+    const auto style = user ? juce::String ("PERSO") : styleUpper (preset.style);
     const int chipW = (int) juce::GlyphArrangement::getStringWidth (font (11, true), style) + 18;
     g.setColour (juce::Colour (0xff2a2f3a));
     g.fillRoundedRectangle (box.getX() + 12, box.getCentreY() - 11, (float) chipW, 22, 11);
-    g.setColour (styleColour (fr (preset.style)));
+    g.setColour (user ? colours::good : styleColour (fr (preset.style)));
     g.setFont (font (11, true));
     g.drawText (style, (int) box.getX() + 12, (int) box.getCentreY() - 11, chipW, 22, juce::Justification::centred);
     g.setColour (colours::text);
     g.setFont (font (15, true));
-    g.drawText (fr (preset.name), (int) box.getX() + chipW + 24, (int) box.getY(), 240, (int) box.getHeight(), juce::Justification::centredLeft);
+    g.drawText (user ? processor.userChainName() : fr (preset.name), (int) box.getX() + chipW + 24, (int) box.getY(), 240, (int) box.getHeight(), juce::Justification::centredLeft);
     juce::Path chevron;
     chevron.startNewSubPath (box.getRight() - 24, box.getCentreY() - 3);
     chevron.lineTo (box.getRight() - 19, box.getCentreY() + 2);
@@ -857,6 +1035,12 @@ void ChainEditor::paint (juce::Graphics& g)
     g.setFont (font (12, true));
     g.drawText (juce::String (juce::roundToInt (mix.getValue())) + " %", 1132, 596, 100, 18, juce::Justification::right);
     g.drawText ((gain.getValue() > 0.05 ? "+" : "") + juce::String (gain.getValue(), 1).replaceCharacter ('.', ',') + " dB", 1132, 648, 100, 18, juce::Justification::right);
+    g.setColour (colours::dim);
+    g.setFont (font (11, true));
+    g.drawText (fr ("ENTRÉE"), 1112, 528, 70, 16, juce::Justification::left);
+    g.setColour (colours::text);
+    g.setFont (font (12, true));
+    g.drawText ((inputTrim.getValue() > 0.05 ? "+" : "") + juce::String (inputTrim.getValue(), 1).replaceCharacter ('.', ',') + " dB", 1162, 528, 70, 16, juce::Justification::right);
     if (autoGain.getToggleState())
     {
         g.setColour (colours::dim);
@@ -900,6 +1084,9 @@ void ChainEditor::rebuildDetail()
     modulePreset.setSelectedId (s.preset + 1, juce::dontSendNotification);
     modulePreset.setVisible (! info.presets.empty());
     removeModule.setVisible (s.type != chain::Type::empty);
+    for (auto* k : knobs) k->setVisible (! showSpectrum);
+    spectrum.setVisible (showSpectrum);
+    styleButton (viewButton, showSpectrum);
     resized();
     repaint();
 }
@@ -953,6 +1140,7 @@ void ChainEditor::timerCallback()
         findings.clear();
         for (const auto& line : vm::describe (processor.analysisResult()))
             findings.add (fr (line.c_str()).replace (fr ("Résonance vers "), fr ("Résonance ")));
+        for (const auto& tag : chain::describe (processor.voiceStats(), processor.voiceSettings())) findings.add (fr (tag.c_str()));
     }
     progress = processor.analysisProgress();
     analyse.setButtonText (processor.isRecording() ? juce::String (juce::roundToInt (progress * 100)) + " %"
@@ -969,6 +1157,7 @@ void ChainEditor::timerCallback()
         modulePreset.setSelectedId (s.preset + 1, juce::dontSendNotification);
     for (auto* c : cards) c->refresh();
     for (auto* k : knobs) k->repaint();
+    if (showSpectrum) spectrum.update (processor);
     repaint (0, 0, 1280, 140);
     repaint (960, 404, 292, 300);
 }

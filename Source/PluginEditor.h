@@ -1,6 +1,8 @@
 #pragma once
 #include "PluginProcessor.h"
+#include "UserLibrary.h"
 #include <juce_gui_basics/juce_gui_basics.h>
+#include <juce_dsp/juce_dsp.h>
 
 namespace ui
 {
@@ -88,14 +90,33 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> attachment;
 };
 
+/** The spectrum of the voice before the chain (grey) and after it (orange). */
+class SpectrumView final : public juce::Component
+{
+public:
+    void update (ChainProcessor&);
+    void paint (juce::Graphics&) override;
+
+private:
+    static constexpr int order = 11, size = 1 << order, bins = size / 2;
+    juce::dsp::FFT fft { order };
+    juce::dsp::WindowingFunction<float> window { (size_t) size, juce::dsp::WindowingFunction<float>::hann };
+    std::array<std::vector<float>, 2> history { std::vector<float> (size, 0.0f), std::vector<float> (size, 0.0f) };
+    std::array<std::vector<float>, 2> levels { std::vector<float> (bins, -100.0f), std::vector<float> (bins, -100.0f) };
+    std::vector<float> work = std::vector<float> (size * 2, 0.0f), incoming = std::vector<float> (16384, 0.0f);
+    double rate = 48000;
+};
+
 class PresetsPage final : public juce::Component
 {
 public:
     PresetsPage (ChainEditor&, ChainProcessor&);
     void paint (juce::Graphics&) override;
     void resized() override;
+    void visibilityChanged() override;
 
 private:
+    struct Row { bool user; int index; };
     class List final : public juce::Component
     {
     public:
@@ -108,11 +129,15 @@ private:
         int hover = -1;
     };
     void setStyle (const juce::String&);
-    std::vector<int> visible() const;
+    std::vector<Row> visible() const;
+    void saveCurrent();
 
     ChainEditor& editor;
     ChainProcessor& processor;
+    UserLibrary library;
     juce::TextButton close { juce::String::fromUTF8 ("×") };
+    juce::TextEditor nameField;
+    juce::TextButton saveButton { juce::String::fromUTF8 ("Enregistrer ma chaîne") };
     juce::OwnedArray<juce::TextButton> styleButtons;
     juce::String style = "Tous";
     List list { *this };
@@ -173,6 +198,11 @@ private:
     juce::ComboBox modulePreset;
     ui::IconButton removeModule { "Retirer le module", ui::Glyph::close };
     juce::TextButton autoGain { "AUTO" };
+    juce::TextButton viewButton { juce::String::fromUTF8 ("Avant / Après") };
+    SpectrumView spectrum;
+    bool showSpectrum = false;
+    juce::Slider inputTrim;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> inputAttachment;
     juce::TooltipWindow tooltips { this, 500 };
     juce::Slider mix, gain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassAttachment, autoGainAttachment;

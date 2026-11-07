@@ -1,6 +1,7 @@
 #pragma once
 #include "ChainPresets.h"
 #include "dsp/Analysis.h"
+#include "VoiceStats.h"
 #include <juce_audio_processors/juce_audio_processors.h>
 #include <atomic>
 
@@ -10,7 +11,7 @@ inline juce::String type (int s) { return "s" + juce::String (s) + "type"; }
 inline juce::String on (int s) { return "s" + juce::String (s) + "on"; }
 inline juce::String preset (int s) { return "s" + juce::String (s) + "preset"; }
 inline juce::String knob (int s, int k) { return "s" + juce::String (s) + "k" + juce::String (k); }
-inline const juce::String mix = "mix", output = "output", autoGain = "autoGain", bypass = "bypass", voiceType = "voiceType", solo = "solo";
+inline const juce::String input = "input", mix = "mix", output = "output", autoGain = "autoGain", bypass = "bypass", voiceType = "voiceType", solo = "solo";
 }
 
 class ChainProcessor final : public juce::AudioProcessor
@@ -56,6 +57,14 @@ public:
     void setSolo (int s);   // -1: none
     int soloSlot() const;
 
+    // The user's own chains: the current chain as data, and loading one back.
+    juce::ValueTree captureChain() const;
+    void loadUserChain (const juce::ValueTree&);
+    juce::String userChainName() const { return userName; }
+
+    /** Reads up to n of the newest mono samples before (processed = false) or after the chain. */
+    int readScope (bool processed, float* dest, int n);
+
     // A/B: two complete chains.
     int activeSlotAB() const { return ab; }
     void switchAB (int which);
@@ -68,6 +77,8 @@ public:
     void pollAnalysis();     // message thread
     bool isAnalysed() const { return analyzed.load(); }
     vm::AnalysisResult analysisResult() const;
+    chain::VoiceStats voiceStats() const;
+    chain::VoiceSettings voiceSettings() const { return chain::suggest (voiceStats()); }
 
     float takeInputPeak() { return engine.inputPeak.exchange (0); }
     float takeOutputPeak() { return engine.outputPeak.exchange (0); }
@@ -82,14 +93,18 @@ private:
     chain::ChainSettings currentSettings() const;
     void writeSlot (int s, const chain::SlotState&);
     void setParam (const juce::String& id, float value);
-    juce::ValueTree captureChain() const;
     void applyChain (const juce::ValueTree&);
-    void applyResult (const vm::AnalysisResult&);
+    void applyResult (const vm::AnalysisResult&, const chain::VoiceStats&);
+    void applyVoice();   // the analysis settings, on the modules of the current chain
 
     chain::Engine engine;
     std::vector<float> monoRight = std::vector<float> (512, 0.0f);
     std::atomic<double> rate { 48000 };
     int currentChain = 0;
+    juce::String userName;
+    juce::AbstractFifo scopeFifo[2] { juce::AbstractFifo (16384), juce::AbstractFifo (16384) };
+    std::vector<float> scopeData[2] { std::vector<float> (16384), std::vector<float> (16384) };
+    void pushScope (int which, const float* l, const float* r, int n);
 
     std::vector<float> capture;
     std::atomic<int> captureState { 0 };   // 0 idle, 1 recording, 2 analysing, 3 done
@@ -98,11 +113,14 @@ private:
     juce::ThreadPool pool { 1 };
     juce::SpinLock resultLock;
     vm::AnalysisResult pendingResult;
+    chain::VoiceStats pendingStats;
 
     std::atomic<bool> analyzed { false };
     std::array<std::atomic<float>, vm::numBands> analysisEq {};
     std::array<std::atomic<float>, vm::maxMarkers> markerHz {}, markerDepth {};
     std::atomic<int> markerCount { 0 };
+    std::atomic<bool> voiceValid { false };
+    std::atomic<float> voiceLevel { -18 }, voiceDynamics { 12 }, voiceSibilance { -20 };
 
     juce::ValueTree slotsAB[2];
     int ab = 0;

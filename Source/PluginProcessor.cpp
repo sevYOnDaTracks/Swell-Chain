@@ -60,6 +60,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChainProcessor::layout()
     for (const auto& v : vm::voiceTypes()) voices.add (String::fromUTF8 (v.name));
     StringArray solos { "Aucun" };
     for (int s = 0; s < chain::slotCount; ++s) solos.add (String (s + 1));
+    l.add (std::make_unique<AudioParameterFloat> (ParameterID { ids::input, 1 }, String::fromUTF8 ("Entrée"), NormalisableRange<float> (-12, 12, 0.5f), 0.0f));
     l.add (std::make_unique<AudioParameterFloat> (ParameterID { ids::mix, 1 }, "Mix", NormalisableRange<float> (0, 100, 1), 100.0f));
     l.add (std::make_unique<AudioParameterFloat> (ParameterID { ids::output, 1 }, "Gain", NormalisableRange<float> (-12, 12, 0.1f), 0.0f));
     l.add (std::make_unique<AudioParameterBool> (ParameterID { ids::autoGain, 1 }, "Volume auto", true));
@@ -106,6 +107,7 @@ chain::ChainSettings ChainProcessor::currentSettings() const
     c.solo = juce::roundToInt (raw (ids::solo)) - 1;
     c.mix = raw (ids::mix) / 100;
     c.outputDb = raw (ids::output);
+    c.inputDb = raw (ids::input);
     c.autoGain = raw (ids::autoGain) > 0.5f;
     c.bypass = raw (ids::bypass) > 0.5f;
     c.voiceType = juce::roundToInt (raw (ids::voiceType));
@@ -159,9 +161,11 @@ void ChainProcessor::render (juce::AudioBuffer<float>& buffer, bool forceBypass)
                 pool.addJob ([this, voice]
                 {
                     const auto result = vm::analyse (capture, rate.load(), voice);
+                    const auto stats = chain::measureVoice (capture, rate.load());
                     {
                         const juce::SpinLock::ScopedLockType lock (resultLock);
                         pendingResult = result;
+                        pendingStats = stats;
                     }
                     captureState = 3;
                 });
@@ -169,6 +173,7 @@ void ChainProcessor::render (juce::AudioBuffer<float>& buffer, bool forceBypass)
         }
     }
 
+    pushScope (0, buffer.getReadPointer (0), buffer.getReadPointer (buffer.getNumChannels() > 1 ? 1 : 0), n);
     if (buffer.getNumChannels() > 1)
         engine.process (buffer.getWritePointer (0), buffer.getWritePointer (1), n, settings);
     else
@@ -183,6 +188,45 @@ void ChainProcessor::render (juce::AudioBuffer<float>& buffer, bool forceBypass)
             for (int i = 0; i < count; ++i) left[i] = 0.5f * (left[i] + monoRight[(size_t) i]);
         }
     }
+    pushScope (1, buffer.getReadPointer (0), buffer.getReadPointer (buffer.getNumChannels() > 1 ? 1 : 0), n);
+}
+
+void ChainProcessor::pushScope (int which, const float* l, const float* r, int n)
+{
+    auto& fifo = scopeFifo[which];
+    auto& data = scopeData[which];
+    int pre1, size1, pre2, size2;
+    fifo.prepareToWrite (n, pre1, size1, pre2, size2);
+    for (int i = 0; i < size1; ++i) data[(size_t) (pre1 + i)] = 0.5f * (l[i] + r[i]);
+    for (int i = 0; i < size2; ++i) data[(size_t) (pre2 + i)] = 0.5f * (l[size1 + i] + r[size1 + i]);
+    fifo.finishedWrite (size1 + size2);
+}
+
+int ChainProcessor::readScope (bool processed, float* dest, int n)
+{
+    auto& fifo = scopeFifo[processed ? 1 : 0];
+    auto& data = scopeData[processed ? 1 : 0];
+    const int ready = fifo.getNumReady();
+    if (ready > n)
+    {
+        int a, b, c, d;
+        fifo.prepareToRead (ready - n, a, b, c, d);
+        fifo.finishedRead (b + d);
+    }
+    int pre1, size1, pre2, size2;
+    fifo.prepareToRead (std::min (n, fifo.getNumReady()), pre1, size1, pre2, size2);
+    for (int i = 0; i < size1; ++i) dest[i] = data[(size_t) (pre1 + i)];
+    for (int i = 0; i < size2; ++i) dest[size1 + i] = data[(size_t) (pre2 + i)];
+    fifo.finishedRead (size1 + size2);
+    return size1 + size2;
+}
+
+void ChainProcessor::loadUserChain (const juce::ValueTree& t)
+{
+    applyChain (t);
+    userName = t.getProperty ("name").toString();
+    setSolo (-1);
+    applyVoice();
 }
 
 //==============================================================================
@@ -214,9 +258,11 @@ void ChainProcessor::loadChain (int index)
 {
     const auto& list = chain::chainPresets();
     currentChain = juce::jlimit (0, (int) list.size() - 1, index);
+    userName.clear();
     const auto slots = chain::slotsFor (list[(size_t) currentChain]);
     for (int s = 0; s < chain::slotCount; ++s) writeSlot (s, slots[(size_t) s]);
     setSolo (-1);
+    applyVoice();
 }
 
 const juce::String ChainProcessor::getProgramName (int index)
@@ -233,6 +279,12 @@ void ChainProcessor::setSlotType (int s, chain::Type type)
     st.preset = 0;
     st.knobs = chain::presetKnobs (type, 0);
     writeSlot (s, st);
+    if (voiceValid.load() && (type == chain::Type::vox || type == chain::Type::match))
+    {
+        const auto v = voiceSettings();
+        if (type == chain::Type::vox) { setKnob (s, 1, v.compress); setKnob (s, 2, v.deEss); }
+        else setKnob (s, 2, v.deEss);
+    }
 }
 
 void ChainProcessor::setModulePreset (int s, int preset)
@@ -338,16 +390,20 @@ void ChainProcessor::pollAnalysis()
 {
     if (captureState.load() != 3) return;
     vm::AnalysisResult result;
+    chain::VoiceStats stats;
     {
         const juce::SpinLock::ScopedLockType lock (resultLock);
         result = pendingResult;
+        stats = pendingStats;
     }
     captureState = 0;
-    if (result.valid) applyResult (result);
+    if (result.valid) applyResult (result, stats);
 }
 
-void ChainProcessor::applyResult (const vm::AnalysisResult& r)
+void ChainProcessor::applyResult (const vm::AnalysisResult& r, const chain::VoiceStats& v)
 {
+    voiceValid = v.valid;
+    voiceLevel = v.levelDb; voiceDynamics = v.dynamicsDb; voiceSibilance = v.sibilanceDb;
     for (int b = 0; b < vm::numBands; ++b) analysisEq[(size_t) b] = r.eq[(size_t) b];
     for (int m = 0; m < vm::maxMarkers; ++m)
     {
@@ -356,6 +412,28 @@ void ChainProcessor::applyResult (const vm::AnalysisResult& r)
     }
     markerCount = r.markerCount;
     analyzed = true;
+    applyVoice();
+}
+
+chain::VoiceStats ChainProcessor::voiceStats() const
+{
+    chain::VoiceStats v;
+    v.valid = voiceValid.load();
+    v.levelDb = voiceLevel.load(); v.dynamicsDb = voiceDynamics.load(); v.sibilanceDb = voiceSibilance.load();
+    return v;
+}
+
+void ChainProcessor::applyVoice()
+{
+    if (! voiceValid.load()) return;
+    const auto v = voiceSettings();
+    setParam (ids::input, v.inputDb);
+    for (int s = 0; s < chain::slotCount; ++s)
+    {
+        const auto st = slot (s);
+        if (st.type == chain::Type::vox) { setKnob (s, 1, v.compress); setKnob (s, 2, v.deEss); }
+        if (st.type == chain::Type::match) setKnob (s, 2, v.deEss);
+    }
 }
 
 vm::AnalysisResult ChainProcessor::analysisResult() const
@@ -377,6 +455,7 @@ void ChainProcessor::getStateInformation (juce::MemoryBlock& out)
 {
     auto t = state.copyState();
     t.setProperty ("chainPreset", currentChain, nullptr);
+    t.setProperty ("userChain", userName, nullptr);
     t.setProperty ("ab", ab, nullptr);
     t.setProperty ("analyzed", analyzed.load(), nullptr);
     juce::String eq, markers;
@@ -384,6 +463,7 @@ void ChainProcessor::getStateInformation (juce::MemoryBlock& out)
     for (int m = 0; m < markerCount.load(); ++m) markers << markerHz[(size_t) m].load() << ":" << markerDepth[(size_t) m].load() << " ";
     t.setProperty ("analysisEq", eq.trim(), nullptr);
     t.setProperty ("markers", markers.trim(), nullptr);
+    t.setProperty ("voice", voiceValid.load() ? juce::String (voiceLevel.load()) + " " + juce::String (voiceDynamics.load()) + " " + juce::String (voiceSibilance.load()) : juce::String(), nullptr);
     for (auto* old : { "SlotA", "SlotB" }) t.removeChild (t.getChildWithName (old), nullptr);
     slotsAB[ab] = captureChain();
     auto a = slotsAB[0].createCopy(); a.setProperty ("name", "A", nullptr);
@@ -404,6 +484,7 @@ void ChainProcessor::setStateInformation (const void* data, int size)
     if (holderA.isValid() && holderA.getNumChildren() > 0) slotsAB[0] = holderA.getChild (0).createCopy();
     if (holderB.isValid() && holderB.getNumChildren() > 0) slotsAB[1] = holderB.getChild (0).createCopy();
     currentChain = (int) t.getProperty ("chainPreset", 0);
+    userName = t.getProperty ("userChain").toString();
     ab = juce::jlimit (0, 1, (int) t.getProperty ("ab", 0));
     analyzed = (bool) t.getProperty ("analyzed", false);
     auto eq = juce::StringArray::fromTokens (t.getProperty ("analysisEq").toString(), " ", "");
@@ -415,6 +496,9 @@ void ChainProcessor::setStateInformation (const void* data, int size)
         markerHz[(size_t) m] = markers[m].upToFirstOccurrenceOf (":", false, false).getFloatValue();
         markerDepth[(size_t) m] = markers[m].fromFirstOccurrenceOf (":", false, false).getFloatValue();
     }
+    auto voice = juce::StringArray::fromTokens (t.getProperty ("voice").toString(), " ", "");
+    voiceValid = voice.size() == 3;
+    if (voice.size() == 3) { voiceLevel = voice[0].getFloatValue(); voiceDynamics = voice[1].getFloatValue(); voiceSibilance = voice[2].getFloatValue(); }
     t.removeChild (holderA, nullptr);
     t.removeChild (holderB, nullptr);
     state.replaceState (t);
