@@ -123,7 +123,7 @@ chain::ChainSettings ChainProcessor::currentSettings() const
     return c;
 }
 
-void ChainProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&) { render (buffer, false); }
+void ChainProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&) { if (! licence->isUnlocked()) { buffer.clear(); return; }  render (buffer, false); }
 void ChainProcessor::processBlockBypassed (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&) { render (buffer, true); }
 
 void ChainProcessor::render (juce::AudioBuffer<float>& buffer, bool forceBypass)
@@ -508,5 +508,5 @@ void ChainProcessor::setStateInformation (const void* data, int size)
     state.replaceState (t);
 }
 
-juce::AudioProcessorEditor* ChainProcessor::createEditor() { return new ResizableEditor (*this, new ChainEditor (*this)); }
+juce::AudioProcessorEditor* ChainProcessor::createEditor() { return swell::LicenceGuard::attach (new ResizableEditor (*this, new ChainEditor (*this))); }
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ChainProcessor(); }

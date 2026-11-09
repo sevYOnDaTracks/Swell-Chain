@@ -1,5 +1,6 @@
 #pragma once
 #include "ChainPresets.h"
+#include "Licence/SwellLicence.h"
 #include "dsp/Analysis.h"
 #include "VoiceStats.h"
 #include <juce_audio_processors/juce_audio_processors.h>
@@ -16,6 +17,10 @@ inline const juce::String input = "input", mix = "mix", output = "output", autoG
 
 class ChainProcessor final : public juce::AudioProcessor
 {
+public:
+    // Licence Swell : partagée par toutes les instances ; silence tant que le plugin n'est pas activé.
+    juce::SharedResourcePointer<swell::Licence> licence;
+
 public:
     ChainProcessor();
     ~ChainProcessor() override;
