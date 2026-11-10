@@ -32,7 +32,8 @@ juce_add_plugin(SwellChain
   MICROPHONE_PERMISSION_TEXT "Swell Chain traite ta voix et l'analyse."
   COPY_PLUGIN_AFTER_BUILD FALSE)
 juce_add_binary_data(ChainAssets SOURCES swell-mark.png)
-target_sources(SwellChain PRIVATE Source/PluginProcessor.cpp Source/PluginEditor.cpp Source/Licence/SwellLicence.cpp)
+target_sources(SwellChain PRIVATE Source/PluginProcessor.cpp Source/PluginEditor.cpp Source/Licence/SwellLicence.cpp
+  Source/Analog/AnalogLook.cpp Source/Analog/AnalogComponents.cpp)
 target_compile_definitions(SwellChain PUBLIC JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0 JUCE_VST3_CAN_REPLACE_VST2=0)
 if(MSVC)
   target_compile_options(SwellChain PRIVATE /utf-8 /bigobj)
@@ -49,3 +50,10 @@ if(MSVC)
 endif()
 target_link_libraries(ChainTest PRIVATE juce::juce_dsp juce::juce_audio_basics PUBLIC juce::juce_recommended_config_flags)
 add_test(NAME ChainDSP COMMAND ChainTest)
+
+# Capture de l'interface (rendu hors ligne en PNG), liée au code du plugin.
+juce_add_console_app(ChainSnapshot PRODUCT_NAME "Swell Chain Snapshot")
+target_sources(ChainSnapshot PRIVATE Tools/Snapshot.cpp)
+target_include_directories(ChainSnapshot PRIVATE "${juce_SOURCE_DIR}/modules" Source)
+target_compile_definitions(ChainSnapshot PRIVATE JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1)
+target_link_libraries(ChainSnapshot PRIVATE SwellChain)
