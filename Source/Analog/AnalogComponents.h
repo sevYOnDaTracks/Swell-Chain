@@ -46,6 +46,8 @@ public:
     void setTargetDb (float vuDb) noexcept;
     void setLit (bool on) { if (on != lit) { lit = on; back.invalidate(); repaint(); } }
     void jumpToTarget() { pos = target; vel = 0; repaint(); }
+    // Rendus hors ligne (pas de VBlank) : fait avancer l'équipage mobile de « seconds ».
+    void advance (double seconds) { if (lastTime <= 0) lastTime = 1.0; tick (lastTime + seconds); }
     void paint (juce::Graphics&) override;
 private:
     void tick (double now);

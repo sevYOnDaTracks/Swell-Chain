@@ -238,6 +238,8 @@ public:
     void settleMeters();
     /** Offline captures: the Before / After screen instead of the knobs. */
     void showBeforeAfter (bool);
+    /** Offline films: one timer tick, then the needles move by dt seconds. */
+    void advanceMeters (double dt);
 
     // Layout of the façade (1280 x 800).
     static constexpr int W = 1280, H = 800;

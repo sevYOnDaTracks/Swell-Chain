@@ -1580,6 +1580,13 @@ void ChainEditor::showBeforeAfter (bool on)
     rebuildDetail();
 }
 
+void ChainEditor::advanceMeters (double dt)
+{
+    timerCallback();
+    vuIn.advance (dt);
+    vuOut.advance (dt);
+}
+
 void ChainEditor::settleMeters()
 {
     timerCallback();

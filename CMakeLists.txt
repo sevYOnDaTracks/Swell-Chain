@@ -57,3 +57,10 @@ target_sources(ChainSnapshot PRIVATE Tools/Snapshot.cpp)
 target_include_directories(ChainSnapshot PRIVATE "${juce_SOURCE_DIR}/modules" Source)
 target_compile_definitions(ChainSnapshot PRIVATE JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1)
 target_link_libraries(ChainSnapshot PRIVATE SwellChain)
+
+# Film de l'interface (images BGRA sur stdout, pour la vidéo de la boutique).
+juce_add_console_app(ChainFilm PRODUCT_NAME "Swell Chain Film")
+target_sources(ChainFilm PRIVATE Tools/Film.cpp)
+target_include_directories(ChainFilm PRIVATE "${juce_SOURCE_DIR}/modules" Source)
+target_compile_definitions(ChainFilm PRIVATE JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1)
+target_link_libraries(ChainFilm PRIVATE SwellChain)
