@@ -1,4 +1,4 @@
-# Swell Chain — 0.1.0
+# Swell Chain — 0.2.0
 
 Une chaîne vocale avec les plugins Swell, dans un seul plugin. VST3 / AU / Standalone, par **Swell-audio** · @sevyondatracks.
 
